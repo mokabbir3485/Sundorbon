@@ -1,0 +1,434 @@
+﻿
+<link href="../Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/icons.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/style.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/ToasterWithBtnAndRibonCustom.css" rel="stylesheet" type="text/css" />
+
+<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            margin: 4px;
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+</style>
+
+
+<!-- end page title end breadcrumb -->
+<!-- end page title end breadcrumb -->
+<div class="container-fluid">
+
+    <div class="col-lg-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb" id="navigationUrlHide">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Sundarban</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Admin </a></li>
+                    <li class="breadcrumb-item active">Item Setup</li>
+                </ol>
+            </div>
+
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+    <br />
+    <div class="col-lg-12">
+
+        <div class="card">
+
+            <h4 class="card-header  text-white mt-0 PalelColor">
+                <i class="mdi mdi-format-list-bulleted-type"></i> Item Setup
+
+            </h4>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                </span>
+                                <input type="text" id="textUsername" ng-model="Item.ProductName" name="userName" class="form-control" placeholder="Item Name">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-bell"></i></button>
+                                </span>
+                                <input type="number" id="textUsername" ng-change="DuplicateGroupName()" ng-model="Item.ROL" min="0" max="100" step="1" name="userName" class="form-control" placeholder="0.00">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <!--<span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-caret-down"></i></button>
+                                </span>-->
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="ReloadItemGroup()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlGroup" ng-options="group.GroupName for group in ItemGroupList track by group.Id">
+                                    <option value=""> --item Group Name--</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <!--<span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-caret-down"></i></button>
+                                </span>-->
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="ReloadMeasurment()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlMeasurmentUnit" ng-options="meas.UnitDescription for meas in MeasurmentList track by meas.Id">
+                                    <option value=""> --Unit Name--</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--<br />-->
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <!--<span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-caret-down"></i></button>
+                                </span>-->
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="ReloadModel()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlModel" ng-options="model.Name for model in ModelList track by model.Id">
+                                    <option value=""> --Model Name--</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <!--<span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-caret-down" "></i></button>
+                                </span>-->
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="ReloadPurchaseVat()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlVat" ng-options="vat.VatPercent for vat in VatList track by vat.Id">
+                                    <option value=""> --Purchase Vat --</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <!--<span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-caret-down"></i></button>
+                                </span>-->
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="ReloadPurchaseVat()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlSupplimentaryDutyId" ng-options="vat.VatPercent for vat in VatList track by vat.Id">
+                                    <option value=""> --Supplimentary Duty --</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-caret-down"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlHasExpiry" ng-options="has.HasExpiry for has in HasExpiryList track by has.Id">
+                                    <option value=""> --Has Expiry --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!--<br />-->
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <label style="font-size:14px;font-weight:bold;">Status</label>
+
+                            <div class="radio text-success" style="margin-left:5px;margin-top:0px;">
+                                <input type="radio" name="IsActive" id="radio3" ng-model="Item.IsActive" ng-value="true">
+                                <label for="radio3">
+                                    Active
+                                </label>
+                                <input type="radio" name="IsActive" id="radio4" ng-model="Item.IsActive" ng-value="false">
+                                <label for="radio4">
+                                    Inactive
+                                </label>
+
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <!--<br />-->
+                <div class="row">
+                    <div class="col-md-2">
+                        <button style="width:100%" ng-click="SaveItem()" class="btn btn-outline-dark">{{BtnName}} </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="width:100%" class="btn btn-outline-danger" ng-click="ResetItem()">Reset </button>
+                    </div>
+                </div>
+                <br />
+                <!--<br />-->
+                <div class="ribbon-1">
+                    <div class="ribbon-box">
+                        <div class="ribbon ribbon-mark" style="background-color:#2d4971 !important;color:white;font-weight:bold">
+                            <i class="fa fa-list-alt" style="font-size:18px;color:white;"></i> Item Setup List
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4">
+
+                            </div>
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                        </span>
+                                        <input type="text" id="textUsername" ng-model="SearchItem" name="userName" class="form-control" placeholder="Item Name And Code">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <button style="width:100%;" class="btn btn-outline-dark" ng-click="SearchBtn()">Search </button>
+                            </div>
+                            <div class="col-md-2">
+                                <button style="width:100%" class="btn btn-outline-danger" ng-click="ClearBtn()">Clear </button>
+                            </div>
+                        </div>
+                        <!--<br />-->
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="table-responsive">
+                                    <table id="item_table" class="table table-borderless table-hover mb-0 table-centered">
+                                        <thead style="background-color:#87b3a6; ">
+                                            <tr class="tableHeadCustom">
+                                                <th class="text-center">S/N</th>
+                                                <th class="text-center">Item Name</th>
+                                                <!--<th class="text-center">Item Code</th>-->
+                                                <th class="text-center">ROL</th>
+                                                <th class="text-center">Has Expiry</th>
+                                                <th class="text-center">Status</th>
+                                                <th class="text-center">Group Name</th>
+
+                                                <th class="text-center">Model Name</th>
+                                                <th class="text-center">Unit Name</th>
+                                                <th class="text-center">Purchase vat</th>
+                                                <th class="text-center">Supplimentory Duty</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="datatable-buttons" dir-paginate="aItem in ItemList | itemsPerPage: PerPage" current-page="currentPage" total-items="total_count" pagination-id="Item">
+                                                <td class="t-cell-center">{{$index + (( currentPage - 1) * PerPage) + 1}}</td>
+                                                <td class="text-center">{{aItem.ProductName}}</td>
+                                                <td class="text-center">
+                                                    {{aItem.ROL}}
+                                                </td>
+                                                <td class="text-center">
+
+                                                    <!--<input type="checkbox" ng-model="aItem.IsActive" value="{{aItem.IsActive}}" />-->
+                                                    <span ng-if="aItem.HasExpiry==true">
+                                                        yes
+                                                    </span>
+                                                    <span ng-if="aItem.HasExpiry==false">
+                                                        No
+                                                    </span>
+
+
+                                                </td>
+                                                <td class="text-center">
+                                                    <p style="font-size:14px;height:20px" ng-if="aItem.IsActive==false">Inactive</p>
+                                                    <p style="font-size:14px;height:20px" ng-if="aItem.IsActive==true">Active</p>
+                                                </td>
+                                                <td class="text-center">{{aItem.GroupName}}</td>
+                                                <td class="text-center">{{aItem.Name}}</td>
+                                                <td class="text-center">{{aItem.UnitDescription}}</td>
+                                                <td class="text-center">{{aItem.VatPercent}}</td>
+                                                <td class="text-center">{{aItem.SupplimentaryDutyName}}</td>
+                                                <td class="text-center">
+                                                    <button class="btn IconColor" ng-click="UpdateItem(aItem)">
+                                                        <i class="typcn typcn-edit" style="font-size:22px; color:black"></i>
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+                                    <div class="{{PaginationAndReport}}">
+                                        <div ng-show="total_count >PerPage">
+                                            <div class="btn" style="background-color:#2d4971">
+                                                <dir-pagination-controls max-size="8"
+                                                                         direction-links="true"
+                                                                         boundary-links="true"
+                                                                         on-page-change="getData(newPageNumber)" style="text-align:center;"
+                                                                         pagination-id="Item">
+                                                </dir-pagination-controls>
+                                            </div>
+
+                                        </div>
+                                        <!--<div>
+                                            <button ng-click="OpenReport()" class="btn btn-outline-dark">Report</button>
+                                        </div>-->
+                                    </div>
+
+
+                                    <br />
+                                    <br />
+
+                                    <div class="row pagination-footer">
+                                        <div class="col-md-6">
+                                            <span>Show </span><input class="input-pagesize" type="number" ng-maxlength="100" ng-minlength="1" width="1" ng-model="PerPage"> <span>Records </span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="pull-right">Showing {{((currentPage-1)*PerPage)+1}} to {{((currentPage-1) * PerPage) + ItemList.length}} of {{total_count}} Records</span>
+                                        </div>
+                                    </div>
+
+                                </div><!--end /tableresponsive-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<h5 class="card-header btn-gradient-primary text-white ">
+                    <i class="fa fa-list-alt"></i> Item Setup List
+                </h5>-->
+
+
+            </div><!--end card-body-->
+
+
+        </div><!--end card-->
+
+
+
+    </div><!--end card-->
+</div> <!-- end col -->
+<!--<script src="../Content/assets/js/jquery.min.js"></script>-->
+<!-- Required datatable js -->
+<script src="../Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../Content/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="../Content/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="../Content/assets/plugins/datatables/jszip.min.js"></script>
+<script src="../Content/assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="../Content/assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.print.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.colVis.min.js"></script>
+
+<script src="../Content/assets/js/bootstrap.bundle.min.js"></script>
+<script src="../Content/assets/js/metisMenu.min.js"></script>
+<script src="../Content/assets/js/waves.min.js"></script>
+<script src="../Content/assets/js/jquery.slimscroll.min.js"></script>
+
+
+
+
+<script src="../../../Content/assets/Sample/irregular-data-seriz.js"></script>
+<script src="../../../Content/assets/Sample/ohlc.js"></script>
+
+<link href="../../../Content/ALLItemCustom.css" rel="stylesheet" />
+<link href="../../../Content/PaginationCustom.css" rel="stylesheet" />
+<style>
+
+    .card {
+        margin-bottom: 24px;
+        border: none;
+        -webkit-box-shadow: 0 6px 20px #44b4a1 !important;
+        box-shadow: 0 6px 20px #44b4a1 !important;
+        border-radius: 5px;
+        background-color: #ffffff;
+    }
+
+    .card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border-radius: 0.25rem;
+    }
+
+    .popover {
+        max-width: 354px;
+        word-break: break-all;
+        word-wrap: break-word;
+        width: 115%;
+        max-height: 325px;
+        overflow: auto;
+    }
+
+    .Pagination-And-Report {
+        display: flex;
+        margin-top: 25px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .Only-Report {
+        display: flex;
+        margin-top: 25px;
+        justify-content: end;
+        align-items: center;
+    }
+</style>
+
+
+
+

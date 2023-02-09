@@ -1,0 +1,164 @@
+﻿<div id="PrintViewHide">
+    <br />
+    <div class="row" style="justify-content: end;">
+        <div class="col-md-2">
+            <button type="button" ng-click="Export();" class="btn btn-primary" title="Export to .pdf">
+                <i class="fa fa-download"></i> Download
+            </button>
+        </div>
+    </div>
+    <hr />
+</div>
+<div id="Item_report" style="background-color:white;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12" style="text-align: center; color: black">
+                <h2>Sundarban Courier Service</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" style="text-align: center; color: black">
+                <h4>Maintenance Department</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6" style="text-align: left; color: black">
+                <p>
+                    24/25 Dilkusha <br />
+                    Motijheel, Dhaka 1000
+                    <br />
+                    <span> Phone: +8809612003003</span><br />
+                    <span>Email: admin@sundarbancourier.com.bd</span>
+
+                </p>
+            </div>
+            <div class="col-6" style="text-align: right; color: black">
+                <!--<div class="col-12">
+                    Date: {{Date}}
+                </div>
+                <div class="col-12">
+                    Time: {{time}}
+                </div>-->
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-12" style="text-align:center; color:black">
+                <hr style="border-top:1px solid black !important" />
+                <h4>Amendment List</h4>
+                <hr style="border-top:1px solid black !important" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3" style="color: black">
+                Amendment. Id:
+            </div>
+            <div class="col-9" style="color: black">
+                {{AmendmentDetailList[0].Id}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3" style="color: black">
+                Amendment. Date :
+            </div>
+            <div class="col-9" style="color: black">
+                {{AmendmentDetailList[0].AmendDate}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3" style="color: black">
+                Amendment. By :
+            </div>
+            <div class="col-9" style="color: black">
+                {{AmendmentDetailList[0].EmployeeName}}
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-6" style="color: black">
+                <h6>Item list</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table width="100%" class="table table-bordered" style="color:black">
+                    <tbody>
+
+                        <tr>
+                            <th class="text-center">S/N</th>
+                            <th class="text-center">Item Name</th>
+                            <th class="text-center">Amended Qty</th>
+                            <th class="text-center" ng-show="ApprovalGivenOn==1">Amended Price</th>
+                            <th class="text-center" ng-show="ApprovalGivenOn==1">Vat</th>
+                            <th class="text-center" ng-show="ApprovalGivenOn==1">AIT</th>
+                            <th class="text-center" ng-show="ApprovalGivenOn==1">SD</th>
+                            <th class="text-center">Remarks</th>
+
+                        </tr>
+                        <tr class="HoverTable" ng-repeat="pr in   AmendmentDetailList track by $index">
+                            <td class="text-center">
+                                {{$index + 1}} 
+                            </td>
+                            <td class="text-center">
+                                {{pr.Combination}}
+                            </td>
+                            <td class="text-center">
+                                {{pr.AmendedQuantity}}
+                            </td>
+                            <td class="text-center" ng-show="ApprovalGivenOn==1">
+                                {{pr.AmendedPrice}}
+                            </td>
+                            <td class="text-center" ng-show="ApprovalGivenOn==1">
+                                {{pr.Vat}}
+                            </td>
+                            <td class="text-center" ng-show="ApprovalGivenOn==1">
+                                {{pr.AIT}}
+                            </td>
+                            <td class="text-center" ng-show="ApprovalGivenOn==1">
+                                {{pr.SD}}
+                            </td>
+                            <td class="text-center">
+                                {{pr.Remarks}}
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<!--<script>
+    jQuery(document).ready(function ($) {
+
+        $(".topbar").attr("hidden", true);
+        $(".left-sidenav").attr("hidden", true);
+        $(".main-footer").attr("hidden", true);
+        $("#br").attr("hidden", true);
+
+        $("div").removeClass("wrapper");
+        $("div").removeClass("content-wrapper");
+    });
+
+
+    function PrintPdf() {
+        window.print();
+    }
+
+</script>-->
+<style>
+    .topbar-left {
+        display: none;
+    }
+    nav#HideBatterycart {
+        display: none;
+    }
+    .page-wrapper {
+        padding-top: 0;
+    }
+</style>

@@ -1,0 +1,643 @@
+﻿
+<link href="../Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/icons.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/style.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/ToasterWithBtnAndRibonCustom.css" rel="stylesheet" type="text/css" />
+
+<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            margin: 4px;
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+</style>
+
+
+<!-- end page title end breadcrumb -->
+<!-- end page title end breadcrumb -->
+<div class="container-fluid">
+
+    <div class="col-lg-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb" id="navigationUrlHide">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Sundarban</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Admin </a></li>
+                    <li class="breadcrumb-item active">Item Setup</li>
+                </ol>
+            </div>
+
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+    <br />
+    <div class="col-lg-12">
+
+        <div class="card">
+
+            <h4 class="card-header  text-white mt-0 PalelColor">
+                <i class="mdi mdi-format-list-bulleted-type"></i> {{Name}}
+
+            </h4>
+   
+            <div class="card-body">
+                    <ul class="nav nav-pills mb-0" >
+                        <li class="nav-item">
+                            <a class="nav-link userClass  {{EmployeeActive}}" data-toggle="pill" ng-click="OnLoadPanel()">Employee</a>
+                        </li>
+                        <li class="nav-item" ng-click="OnLoadUsertPanel()">
+                            <a class="nav-link  {{UserActive}}" data-toggle="pill">User</a>
+                        </li>
+
+                    </ul>
+                    <hr />
+                    <div ng-show="Employeeload">
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                            </span>
+                                            <input type="text" id="textUsername" ng-model="Employee.Title" name="Title" class="form-control" placeholder="Title ">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                            </span>
+                                            <input type="text" id="textUsername" ng-model="Employee.FirstName " name="FirstName" class="form-control" placeholder="First Name">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                        </span>
+                                        <input type="text" id="textUsername" ng-model="Employee.MiddleName" name="MiddleName" class="form-control" placeholder="Middle Name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                        </span>
+                                        <input type="text" id="textUsername" ng-model="Employee.LastName" name="LastName" class="form-control" placeholder="Last Name">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn IconColor"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                            <input type="text" id="dateOfBirth" ng-model="Employee.DateOfBirth" name="DateOfBirth" class="form-control" placeholder="Date Of Birth " readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                            </span>
+                                            <input type="text" id="textUsername" ng-model="Employee.BloodGroup" name="BloodGroup" class="form-control" placeholder="Blood Group">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-prepend">
+                                                    <button type="button" class="btn IconColor"><i class="fa fa-file-contract"></i></button>
+                                                </span>
+                                                <input type="text" id="textUsername" ng-model="Employee.ContactNo" name="ContactNo" class="form-control" placeholder="Contract No">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-prepend">
+                                                    <button type="button" class="btn IconColor"><i class="fa fa-envelope"></i></button>
+                                                </span>
+                                                <input type="email" id="textUsername" ng-model="Employee.Email" name="Email" class="form-control" placeholder="Email">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                              
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="checkbox checkbox-success">
+                                                <input id="checkbox3" name="IsFlexibleOnTime" ng-model="Employee.IsFlexibleOnTime" type="checkbox" ng-value="false">
+                                                <label for="checkbox3">
+                                                    Flexible Hours
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="checkbox checkbox-success">
+                                                <input id="checkbox4" type="checkbox" name="IsFlexibleOnDate" ng-model="Employee.IsFlexibleOnDate" ng-value="false">
+                                                <label for="checkbox4">
+                                                    Flexible Days
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-address-book"></i></button>
+                                        </span>
+                                        <textarea class="form-control" name="PresentAddress" ng-model="Employee.PresentAddress" cols="3" rows="4" placeholder="Present Address...."></textarea>
+
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <label style="font-size:14px;font-weight:bold;">Gender</label>
+
+                                        <div class="radio text-success" style="margin-left:5px;margin-top:0px;">
+                                            <input type="radio" name="Gender" id="radio3" ng-model="Employee.Gender" value="Male">
+                                            <label for="radio3">
+                                                Male
+                                            </label>
+                                            <input type="radio" name="Gender" id="radio4" ng-model="Employee.Gender" value="Female">
+                                            <label for="radio4">
+                                                Female
+                                            </label>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <label style="font-size:14px;font-weight:bold;">Status</label>
+
+                                        <div class="radio text-success" style="margin-left:5px;margin-top:0px;">
+                                            <input type="radio" ng-model="Employee.IsActive" name="IsActive" id="radio6" ng-value="true">
+                                            <label for="radio6">
+                                                Active
+                                            </label>
+                                            <input type="radio" ng-model="Employee.IsActive" name="IsActive" id="radio7" ng-value="false">
+                                            <label for="radio7">
+                                                Inactive
+                                            </label>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor" ng-click="ReloadGradeDynamic()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                        </span>
+                                        <select class="form-control" ng-model="ddlGrade" name="ddlGrade" ng-options="grade.GradeName for grade in GradeList track by grade.GradeId">
+                                            <option value=""> --Grade --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                              
+                                <br />
+                                <div class="form-group">
+                                    <div class="checkbox checkbox-success" ng-model="Employee.IsUser" name="IsUser" ng-value="false">
+                                        <input id="checkbox5" type="checkbox" ng-click="OnLoadUsertPanel()">
+                                        <label for="checkbox5" ng-click="OnLoadUsertPanel()">
+                                            Create User
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor" ng-click="ReloadContractType()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                        </span>
+                                        <select class="form-control" ng-model="ddlContractType" name="ddlContractType" ng-options="contract.ContractTypeName for contract in GetAllContractTypeList track by contract.ContractTypeId">
+                                            <option value=""> --Contract Type  --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor" ng-click="ReloadDepartment()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                        </span>
+                                        <select class="form-control" ng-model="ddlDepartment" ng-options="Dep.DepartmentName for Dep in DepartmentList track by Dep.Id">
+                                            <option value=""> -- Select Department--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor" ng-click="ReloadSection()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                        </span>
+                                        <select class="form-control" ng-model="ddlSection" name="ddlSection" ng-change="Employee.Id=ddlSection.Id" ng-options="section.SectionName for section in SectionList track by section.Id">
+                                            <option value=""> --Section --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor" ng-click="ReloadDesignation()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                        </span>
+                                        <select class="form-control" ng-model="ddlDesignation" name="ddlDesignation" ng-change="Employee.DesignationId=ddlDesignation.DesignationId" ng-options="designation.DesignationName for designation in DesignationList track by designation.DesignationId ">
+                                            <option value=""> --Designation --</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                            </span>
+                                            <input type="text" id="textUsername" ng-model="Employee.EmployeeCode" name="EmployeeCode" class="form-control" placeholder="Emp Code ">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                            </span>
+                                            <input type="number" id="textUsername" ng-model="Employee.BasicSalary " name="BasicSalary" class="form-control" placeholder="Gross salary">
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn IconColor"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                            <input type="text" id="joiningDate" ng-model="Employee.JoiningDate" name="JoiningDate" class="form-control" placeholder="Joining Date" readonly>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn IconColor"><i class="fa fa-calendar"></i></button>
+                                            </span>
+                                            <input type="text" id="finisheDate" ng-model="Employee.FinishDate" name="FinishDate" class="form-control" placeholder="Finished Date" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            </div>
+                        
+                       
+                    </div>
+
+                    <div ng-show="Userload">
+                        <div class="row">
+                               <div class="col-md-4">
+            
+                                   <div class="input-group">
+                                       <!--<span class="input-group-prepend">
+        <button type="button" class="btn IconColor"><i class="fa fa-caret-down"></i></button>
+    </span>-->
+                                       <!-- <select class="form-control" ng-model="ddlRole" ng-change="OnPermission(ddlRole)" ng-options="role.RoleName for role in Rolelist track by role.RoleId"> -->
+                                       <span class="input-group-prepend">
+                                           <button type="button" class="btn IconColor" ng-click="ReloadRole()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                       </span>
+                                       <select class="form-control" ng-model="ddlRole" ng-options="role.RoleName for role in Rolelist track by role.RoleId">
+
+                                           <option value=""> --- Role Name -- </option>
+                                       </select>
+                                   </div>
+                                   <br />
+                      
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                        </span>
+                                        <input type="text" id="textUsername" ng-model="User.Username" name="MiddleName" class="form-control" placeholder="User Name">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-lock"></i></button>
+                                        </span>
+                                        <input type="text" id="textUsername" ng-model="User.Password" name="Password" class="form-control" placeholder="Password">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-lock"></i></button>
+                                        </span>
+                                        <input type="text" id="textUsername" ng-model="User.ConfrimPassword" ng-change="ConfrimPasswordCheck()" name="MiddleName" class="form-control" placeholder="Confrim Password">
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                    </div>
+
+                     
+                        <div class="row">
+                            <div class="col-md-2">
+                                <button style="width:100%" ng-click="SaveEmployee()" class="btn btn-outline-dark">{{btnName}} </button>
+                            </div>
+                            <div class="col-md-2">
+                                <button style="width:100%" class="btn btn-outline-danger" ng-click="resetBtn()">Reset </button>
+                            </div>
+                        </div>
+          
+                     <br />
+                     <br />
+                    <div class="ribbon-1">
+                        <div class="ribbon-box">
+                            <div class="ribbon ribbon-mark" style="background-color:#2d4971 !important;color:white;font-weight:bold">
+                                <i class="fa fa-list-alt" style="font-size:18px;color:white;"></i> Employee List
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                            </span>
+                                            <input type="text" id="textUsername" ng-model="SearchItem" name="userName" class="form-control" placeholder="Employee">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button style="width:100%;" class="btn btn-outline-dark" ng-click="SearchBtn()">Search </button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button style="width:100%" class="btn btn-outline-danger" ng-click="ClearBtn()">Clear </button>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <div class="table-responsive">
+                                        <table id="item_table" class="table table-borderless table-hover mb-0 table-centered">
+                                            <thead style="background-color:#87b3a6; ">
+                                                <tr class="tableHeadCustom">
+                                                    <th class="text-center">S/N</th>
+                                                    <th class="text-center">Employee Name</th>
+                                                    <!--<th class="text-center">User Name</th>-->
+                                                    <th class="text-center">Code</th>
+
+
+                                                    <th class="text-center">Contact No.</th>
+                                                    <th class="text-center">Status</th>
+                                                    <th class="text-center">Action</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr id="datatable-buttons" dir-paginate="emp in EmployeeList | itemsPerPage: PerPage" current-page="currentPage" total-items="total_count" pagination-id="Item">
+                                                    <td class="t-cell-center">{{$index + (( currentPage - 1) * PerPage) + 1}}</td>
+                                                    <td class="text-center">{{emp.FirstName}} {{emp.MiddleName}} {{emp.LastName}}</td>
+                                                    <!--<td class="text-center">
+                                                        {{emp.Username}}
+                                                    </td>-->
+
+                                                    <td class="text-center">
+                                                        {{emp.EmployeeCode}}
+                                                    </td>
+                                                    <td class="text-center">{{emp.ContactNo}}</td>
+                                                    <td class="text-center">
+                                                     
+                                                        <span ng-if="emp.IsActive==true">
+                                                            Active
+                                                        </span>
+                                                        <span ng-if="emp.IsActive==false">
+                                                            Inactive
+                                                        </span>
+                                                    </td>
+
+                                                    <td class="text-center">
+                                                        <button class="btn IconColor" ng-click="EmployeeUpdate(emp)">
+                                                            <i class="typcn typcn-edit" style="font-size:22px; color:black"></i>
+                                                        </button>
+                                                    </td>
+
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                      <hr />
+                                        <div ng-show="total_count >PerPage">
+                                            <div class="btn" style="background-color:#2d4971">
+                                                <dir-pagination-controls max-size="8"
+                                                                         direction-links="true"
+                                                                         boundary-links="true"
+                                                                         on-page-change="getData(newPageNumber)" style="text-align:center;"
+                                                                         pagination-id="Item">
+                                                </dir-pagination-controls>
+                                            </div>
+
+                                        </div>
+                                       
+                                        <br />
+                                        <br />
+
+                                        <div class="row pagination-footer">
+                                            <div class="col-md-6">
+                                                <span>Show </span><input class="input-pagesize" type="number" ng-maxlength="100" ng-minlength="1" width="1" ng-model="PerPage"> <span>Records </span>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <span class="pull-right">Showing {{((currentPage-1)*PerPage)+1}} to {{((currentPage-1) * PerPage) + ItemList.length}} of {{total_count}} Records</span>
+                                            </div>
+                                        </div>
+
+                                    </div><!--end /tableresponsive-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div><!--end card-body-->
+
+
+            </div><!--end card removed -->
+   
+
+
+    </div><!--end card-->
+</div> <!-- end col -->
+<!--<script src="../Content/assets/js/jquery.min.js"></script>-->
+<!-- Required datatable js -->
+<script src="../Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../Content/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="../Content/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="../Content/assets/plugins/datatables/jszip.min.js"></script>
+<script src="../Content/assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="../Content/assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.print.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.colVis.min.js"></script>
+
+<script src="../Content/assets/js/bootstrap.bundle.min.js"></script>
+<script src="../Content/assets/js/metisMenu.min.js"></script>
+<script src="../Content/assets/js/waves.min.js"></script>
+<script src="../Content/assets/js/jquery.slimscroll.min.js"></script>
+
+
+
+
+<script src="../../../Content/assets/Sample/irregular-data-seriz.js"></script>
+<script src="../../../Content/assets/Sample/ohlc.js"></script>
+
+<link href="../../../Content/ALLItemCustom.css" rel="stylesheet" />
+<link href="../../../Content/PaginationCustom.css" rel="stylesheet" />
+<style>
+
+    .card {
+        margin-bottom: 24px;
+        border: none;
+        -webkit-box-shadow: 0 6px 20px #44b4a1 !important;
+        box-shadow: 0 6px 20px #44b4a1 !important;
+        border-radius: 5px;
+        background-color: #ffffff;
+    }
+
+    .card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border-radius: 0.25rem;
+    }
+
+    .popover {
+        max-width: 354px;
+        word-break: break-all;
+        word-wrap: break-word;
+        width: 115%;
+        max-height: 325px;
+        overflow: auto;
+    }
+
+    .Pagination-And-Report {
+        display: flex;
+        margin-top: 25px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .Only-Report {
+        display: flex;
+        margin-top: 25px;
+        justify-content: end;
+        align-items: center;
+    }
+
+
+    /*.nav-pills .nav-item.show .nav-link, .nav-pills .nav-link.active {
+        background-color: #2d4971 !important;
+        color: white;
+    }*/
+
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+        color: white;
+        background-color: #2d4971 !important;
+    }
+
+    .nav-pills .nav-item.show .nav-link, .nav-pills .nav-link.active {
+        background: #2d4971;
+        color: white;
+        -webkit-box-shadow: #2d4971 !important;
+        box-shadow: #2d4971;
+    }
+
+    .nav-pills .nav-item.show .nav-link, .nav-pills .nav-link.active {
+        background-color: #2d4971 !important;
+        color: white;
+    }
+
+    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+        color: white;
+        background-color: #2d4971 !important;
+    }
+</style>
+
+
+<script>
+    $('#dateOfBirth').bootstrapMaterialDatePicker({
+        format: 'DD/MM/YYYY',
+        cancelText: 'Descartar',
+        time: false,
+        clearButton: true
+
+    });
+    $('#joiningDate').bootstrapMaterialDatePicker({
+        format: 'DD/MM/YYYY',
+        cancelText: 'Descartar',
+        time: false,
+        clearButton: true
+
+    });
+    $('#finisheDate').bootstrapMaterialDatePicker({
+        format: 'DD/MM/YYYY',
+        cancelText: 'Descartar',
+        time: false,
+        clearButton: true
+
+    });
+</script>
+

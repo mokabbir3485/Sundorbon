@@ -1,0 +1,157 @@
+﻿<div id="PrintViewHide">
+    <br />
+    <div class="row">
+        <div class="col-md-3">
+            <div class="input-group">
+                <span class="input-group-prepend">
+                    <button type="button" class="btn IconColor"><i class="fa fa-caret-down"></i></button>
+                </span>
+                <select class="form-control" ng-model="ddlGroup" ng-options="group.GroupName for group in ItemGroupList track by group.Id">
+                    <option value=""> --item Group Name--</option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-prepend">
+                        <button type="button" class="btn IconColor"><i class="fa fa-caret-down"></i></button>
+                    </span>
+                    <select class="form-control" ng-model="ddlModel" ng-options="model.Name for model in ModelList track by model.Id">
+                        <option value=""> --Model Name--</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button style="width:100%;" class="btn btn-outline-dark" ng-click="SearchBtn()">Search </button>
+        </div>
+        <div class="col-md-2">
+            <button style="width:100%" class="btn btn-outline-danger" ng-click="ClearBtn()">Clear </button>
+        </div>
+        <div class="col-md-2">
+            <button type="button" ng-click="Export();" class="btn btn-primary" title="Export to .pdf">
+                <i class="fa fa-download"></i> Download
+            </button>
+        </div>
+    </div>
+    <!--<div class="row">
+        
+    </div>
+    <div class="row d-flex justify-content-end">
+        
+    </div>-->
+    <hr />
+</div>
+<div id="Item_report" style="background-color:white;">
+    <div class="container">
+        <div class="row">
+            <div class="col-12" style="text-align: center; color: black">
+                <h2>Sundarban Courier Service</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12" style="text-align: center; color: black">
+                <h4>Maintenance Department</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6" style="text-align: left; color: black">
+                <p>
+                    24/25 Dilkusha <br />
+                    Motijheel, Dhaka 1000
+                    <br />
+                    <span> Phone: +8809612003003</span><br />
+                    <span>Email: admin@sundarbancourier.com.bd</span>
+
+                </p>
+            </div>
+            <div class="col-6" style="text-align: right; color: black">
+                <div class="col-12">
+                    Date: {{Date}}
+                </div>
+                <div class="col-12">
+                    Time: {{time}}
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-12" style="text-align:center; color:black">
+                <hr style="border-top:1px solid black !important" />
+                <h4>Store Product List</h4>
+                <hr style="border-top:1px solid black !important" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3" style="color: black">
+                Group Name:
+            </div>
+            <div class="col-9" style="color: black">
+                {{GroupNameToDisplay}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3" style="color: black">
+                Model Id:
+            </div>
+            <div class="col-9" style="color: black">
+                {{ModelNameToDisplay}}
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="col-6" style="color: black">
+                <h6>Item list</h6>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <table width="100%" class="table table-bordered" style="color:black">
+                    <tr style="text-align:center;">
+                        <th>Group Name</th>
+                        <th>Product Name</th>
+                        <th>Item Code</th>
+                        <th>Model Name</th>
+                        <th>Unit Description</th>
+                        <th>Has Expiry</th>
+                        <th>Is Active</th>
+                    </tr>
+                    <tr ng-repeat="reports in ReportList" style="text-align:center">
+                        <td>{{reports.GroupName}}</td>
+                        <td>{{reports.ProductName}}</td>
+                        <td>{{reports.ItemCode}}</td>
+                        <td>{{reports.ModelName}}</td>
+                        <td>{{reports.UnitDescription}}</td>
+                        <td>{{reports.HasExpiry}}</td>
+                        <td>{{reports.IsActive}}</td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<!--<script>
+    jQuery(document).ready(function ($) {
+
+        $(".topbar").attr("hidden", true);
+        $(".left-sidenav").attr("hidden", true);
+        $(".main-footer").attr("hidden", true);
+        $("#br").attr("hidden", true);
+
+        $("div").removeClass("wrapper");
+        $("div").removeClass("content-wrapper");
+    });
+
+
+    function PrintPdf() {
+        window.print();
+    }
+
+</script>-->

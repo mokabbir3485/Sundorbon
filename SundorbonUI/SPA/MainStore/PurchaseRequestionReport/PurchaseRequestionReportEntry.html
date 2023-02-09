@@ -1,0 +1,224 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+
+        body {
+            font-family: "Times New Roman", Times, serif;
+            color: #000000;
+            writing-mode: inherit;
+            width: 100%;
+            height: 100%;
+        }
+
+        #UpperTable td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        .ProductTable th {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        .ProductTable td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        .footer {
+            position: fixed;
+            left: 29px;
+            bottom: 0px;
+        }
+
+        .flexcontainer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        @media screen {
+            img {
+                height: 200px;
+                width: 300px;
+                margin-top: 0px;
+            }
+        }
+
+        @media print {
+            /*#LogoImg, img {
+                margin-top: -10px;
+            }
+
+            #PrintImg, img {
+                margin-top: -10px;
+                height: 200px;
+                width: 300px;
+            }
+
+            .page-break {
+                display: block;
+                page-break-before: always;
+            }
+
+            img {
+                height: 200px;
+                width: 300px;
+                margin-top: 60px;
+            }*/
+
+            .hidden-print{
+                display:none;
+            }
+
+        }
+
+        @page {
+            size: A4;
+            max-height: 100%;
+            max-width: 100%;
+            font-family: 'Times New Roman';
+        }
+
+        #HideBatterycart{
+            display:none;
+        }
+        #logoText .logo {
+            display: none !important;
+            overflow:hidden !important;
+        }
+      
+        #topbar {
+            display: none !important;
+        }
+        .topbar-left {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <table style="width: 100%">
+        <tbody>
+            <tr>
+                <td>
+                    <div class="hidden-print">
+                      
+                        <div class="row">
+
+                            <div class="col-md-10">
+
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" onclick="PrintPdf();"  class="btn btn-dark" style="border-radius: 3px; margin-bottom: -.9em; margin-top: -15px; padding-bottom: 3px; padding-top: 3px;" title="Export to .doc">
+                                    <i class="fa fa-print"></i>&nbsp;Print
+                                </button>
+                            </div>
+
+                        </div>
+                        <hr />
+                    </div>
+                    <div class="" id="source-html">
+
+                        <div>
+                            <br />
+                            <br />
+                         
+                            <table id="heading" style="text-align: center;margin-left:auto;margin-right:auto;">
+
+                                <tr>
+                                    <td>
+                                      
+                                    </td>
+                                    <td>
+                                        <p style="font-size: 30px;line-height: 1; margin : 0; padding : 0 ; font-weight: bold;"><strong> <b>Sundarban Courier Service</b></strong></p>
+                                        <!--<p style="font-size: 14px; line-height: 1.5; margin : 0; padding : 0 ;">
+                                            Address: Flat- 22 A, Navana Tower, 45 Gulshan1, Dhaka-1212
+                                        </p>-->
+                                       
+                                       
+                                        <p style="font-size: 25px; text-align: center; margin: 0px; padding: 0px;"> <b> <u>{{Name}}</u></b></p>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        
+                        </div>
+
+                        <table style="width:100%">
+                            <tr>
+                                <td style="width:80%">
+                                  
+                                    <p style="line-height:1px">PR. Number :  {{PurchaseRequestionDetailList[0].Number}}</p>
+                                    <p style="line-height:1px">PR. Date : {{PurchaseRequestionDetailList[0].RequisitionDate}}</p>
+                                   
+                                </td>
+                                <td style="width:20%;">
+                                    <p style="line-height:1px;">Prepared By :  <span style="text-align:right"> {{PurchaseRequestionDetailList[0].EmployeeName}}</span></p>
+                                    <p style="line-height:1px">Date : <span style="text-align:right"> {{PurchaseRequestionDetailList[0].RequisitionDate}}</span></p>
+
+                                </td>
+                            </tr>
+                        </table>
+                     
+                        <table class="ProductTable" style="width: 100%;  margin-left: auto; margin-right: auto;">
+                            <tbody>
+
+                                <tr>
+                                    <th class="text-center">S/N</th>
+                                    <th class="text-center">Item Name</th>
+                                    <th class="text-center">Requested Qty</th>
+                                    <th class="text-center">Remarks</th>
+                                  
+                                </tr>
+                                <tr class="HoverTable" ng-repeat="pr in   PurchaseRequestionDetailList track by $index">
+                                    <td class="text-center">
+                                        {{$index + 1}}
+                                    </td>
+                                    <td class="text-center">
+                                        {{pr.Combination}}
+                                    </td>
+                                    <td class="text-center">
+                                        {{pr.RequestedQty}} {{pr.UnitDescription}}
+                                    </td>
+                                    <td class="text-center">
+                                        {{pr.Remarks}}
+                                    </td>
+
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                       
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
+<script>
+
+
+
+    jQuery(document).ready(function ($) {
+
+        $(".main-sidebar").attr("hidden", true);
+        $(".main-header").attr("hidden", true);
+        $(".main-footer").attr("hidden", true);
+        $("#br").attr("hidden", true);
+
+        $("div").removeClass("wrapper");
+        $("div").removeClass("content-wrapper");
+    });
+
+
+    function PrintPdf() {
+        window.print();
+    }
+
+</script>

@@ -1,0 +1,196 @@
+﻿
+<link href="../Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/icons.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/style.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/ToasterWithBtnAndRibonCustom.css" rel="stylesheet" type="text/css" />
+
+<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            margin: 4px;
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+</style>
+<br />
+<div id="myModal" class="modal fade" data-backdrop="static">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Select Counter</h5>
+                <!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <button type="button" class="btn IconColor" ng-click="ReloadCounter()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                    </span>
+                                    <select class="form-control" ng-model="CounterId" name="ddlGrade" ng-options="coun.CounterName for coun in CounterList track by coun.Id">
+                                        <option value="">--Counter--</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col" style="display: flex;justify-content: end; margin-top: 10px;">
+                            <button type="submit" class="btn btn-primary" ng-click="SelectCounter()">Select</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-3">
+        <div class="card card-eco">
+            <div class="card-body">
+                <a>
+                    <h5 class="font-weight-bold">Item Entry</h5>
+
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <h6 class="text-pink"><span class="text-purple">Today:</span> 100</h6>
+                            <h6 class="text-pink"><span class="text-purple">This Month:</span> 150</h6>
+                            <h6 class="text-pink"><span class="text-purple">This Year:</span> 1500</h6>
+                        </div>
+                        <i class="ti-bookmark-alt card-eco-icon bg-icon-purple align-self-center"></i>
+                    </div>
+                </a>
+                <!--<p class="text-purple">{{ToDateBooking}}</p>
+                <p class="mb-0 text-muted text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i> 8.5%</span>Up From Yesterday</p>-->
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+    <div class="col-lg-3">
+        <div class="card card-eco">
+
+
+            <div class="card-body">
+                <h5 class="font-weight-bold">Total Received</h5>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="text-pink"><span class="text-purple">Today:</span> 200 </h6>
+                        <h6 class="text-pink"><span class="text-purple">This Month:</span> 6000 </h6>
+                        <h6 class="text-pink"><span class="text-purple">This Year:</span> 72000 </h6>
+                    </div>
+                    <i class="fas fa-dollar-sign card-eco-icon bg-icon-pink align-self-center"></i>
+                </div>
+                <!--<p class="text-purple">{{ToDateBooking}}</p>
+                <p class="mb-0 text-muted text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i> 8.5%</span>Up From Yesterday</p>-->
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+    <div class="col-lg-3">
+        <div class="card card-eco">
+
+
+            <div class="card-body">
+                <h5 class="font-weight-bold">New Entry</h5>
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <h6 class="text-pink"><span class="text-purple">Today:</span> 30 </h6>
+                        <h6 class="text-pink"><span class="text-purple">This Month:</span> 120</h6>
+                        <h6 class="text-pink"><span class="text-purple">This Year:</span> 3000</h6>
+                    </div>
+                    <i class="ti-bookmark-alt card-eco-icon bg-icon-purple align-self-center"></i>
+                </div>
+                <!--<p class="text-purple">{{ToDateBooking}}</p>
+                <p class="mb-0 text-muted text-truncate"><span class="text-success"><i class="mdi mdi-trending-up"></i> 8.5%</span>Up From Yesterday</p>-->
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+    <div class="col-lg-3">
+        <div class="card card-eco">
+
+
+            <div class="card-body">
+                <h5 class="font-weight-bold">Upcoming Payment</h5>
+                <br />
+                <div class="d-flex justify-content-between">
+                    nt
+                    <h4 class="text-pink">1,50000 $</h4>
+                    <i class="fas fa-dollar-sign card-eco-icon bg-icon-pink align-self-center"></i>
+                </div>
+            </div><!--end card-body-->
+        </div><!--end card-->
+    </div><!--end col-->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="card">
+
+            <div class="card-body">
+                <h5 class="font-weight-bold">Yearly Consumption Graph</h5>
+                <div class="chart-demo">
+                    <div id="apex_line1" class="apex-charts"></div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="font-weight-bold">Payment</h5>
+                <div class="row">
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-6">
+                        <canvas id="CountPieChartAdminChargingUnit" width="150" height="100"></canvas>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!--<script src="../Content/assets/js/jquery.min.js"></script>-->
+<script src="../Content/assets/js/bootstrap.bundle.min.js"></script>
+<script src="../Content/assets/js/metisMenu.min.js"></script>
+<script src="../Content/assets/js/waves.min.js"></script>
+<script src="../Content/assets/js/jquery.slimscroll.min.js"></script>
+
+
+
+<script src="../Content/assets/plugins/apexcharts/apexcharts.min.js"></script>
+
+<!--<script src="https://apexcharts.com/samples/assets/irregular-data-series.js"></script>-->
+<!--<script src="https://apexcharts.com/samples/assets/ohlc.js"></script>-->
+<script src="../../../Content/assets/Sample/irregular-data-seriz.js"></script>
+<script src="../../../Content/assets/Sample/ohlc.js"></script>
+
+<script src="../Content/assets/pages/jquery.apexcharts.init.js"></script>
+
+<script src="../../../Content/assets/CustomChart/Chart.min.js"></script>
+<!--<script src="../Content/assets/pages/jquery.analytics_dashboard.init.js"></script>-->
+<!-- App js -->
+<!--<script src="../Content/assets/js/app.js"></script>-->
+<!--<script src="../Content/assets/pages/jquery.eco_dashboard.init.js"></script>-->

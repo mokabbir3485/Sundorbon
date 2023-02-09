@@ -1,0 +1,615 @@
+﻿
+<link href="../Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/icons.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/style.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/ToasterWithBtnAndRibonCustom.css" rel="stylesheet" type="text/css" />
+
+<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            margin: 4px;
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+</style>
+
+
+<!-- end page title end breadcrumb -->
+<!-- end page title end breadcrumb -->
+<div class="container-fluid">
+
+    <div class="col-lg-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb" id="navigationUrlHide">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Sundarban</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Admin </a></li>
+                    <li class="breadcrumb-item active">Issue</li>
+                </ol>
+            </div>
+
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+    <br />
+
+    <div class="col-lg-12">
+
+        <div class="card">
+
+            <h4 class="card-header  text-white mt-0 PalelColor">
+                <i class="mdi mdi-format-list-bulleted-type"></i> Store Issue
+
+            </h4>
+            <div class="card-body">
+
+
+                <div class="row">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="LoadForIssue()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlIssueType" ng-change="LoadForWSAndPB()" ng-options="issue.IssueType for issue in IssueTypeList track by issue.Id">
+                                    <option value=""> --Issue Type--</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-search"></i></button>
+                                </span>
+                                <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="Search" ng-model="FormDate" name="Search" class="form-control" placeholder="From Date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-search"></i></button>
+                                </span>
+                                <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="Search" ng-model="ToDate" name="Search" class="form-control" placeholder="To Date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="width:100%" ng-click="LoadForIssue()" ng-disabled="!ddlIssueType" class="btn btn-outline-dark">Search </button>
+                    </div>
+                    <div class="col-md-1">
+                        <button style="width:100%" class="btn btn-outline-danger" ng-click="ClearForIssue()">Reset </button>
+                    </div>
+
+                </div>
+                <hr />
+
+                <div class="row" ng-if="LoadForIssueList.length">
+
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table id="item_table" class="table table-borderless table-hover mb-0 table-centered">
+                                <thead style="background-color:#87b3a6; ">
+                                    <tr class="tableHeadCustom">
+                                        <th class="text-center" style="width:10%">S/N</th>
+                                        <th class="text-center" style="width:30%">Ref. Transaction No.</th>
+                                        <th class="text-center" style="width:30%">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+                                    <tr id="datatable-buttons" dir-paginate="aIssue in LoadForIssueList | itemsPerPage: samplePerPage" current-page="samplecurrentPage" total-items="TotalLength" pagination-id="SamplePage" ng-click="GetIssueForDetails(aIssue)">
+                                        <td class="text-center">
+                                            {{$index + ((samplecurrentPage -1) * samplePerPage) + 1}}
+                                        </td>
+                                        <td class="text-center" style="width:30%">{{aIssue.Number}}</td>
+                                        <td class="text-center" style="width:30%" ng-if="ddlIssueType.Id==1">{{aIssue.RequistionDate}}</td>
+                                        <td class="text-center" style="width:30%" ng-if="ddlIssueType.Id==2">{{aIssue.BillDate}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div ng-show="TotalLength>samplePerPage">
+                                <hr />
+                            </div>
+
+                            <div ng-show="TotalLength>samplePerPage" class=" btn " style="background-color:#2d4971">
+                                <dir-pagination-controls max-size="8"
+                                                         direction-links="true"
+                                                         boundary-links="true"
+                                                         on-page-change="GetSampleDate(newPageNumber)" style="text-align:center;"
+                                                         pagination-id="SamplePage">
+                                </dir-pagination-controls>
+
+                            </div>
+                            <div style="float:right">
+                                <span ng-show="TotalLength>samplePerPage" class="text-right" style="color:black;">Showing <span> {{((samplecurrentPage-1)*samplePerPage)+1}}</span>  to {{((samplecurrentPage-1) * samplePerPage) + PurchaseRequestionDetailList.length}} of {{TotalLength}} Records</span>
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-calendar"></i></button>
+                                </span>
+                                <input type="text" id="IssueDate" ng-model="StoreIssue.IssueDate" name="IssueDate" class="form-control" placeholder="Issue Date (dd/mm/yy)" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+
+                                </span>
+                                <input type="text" id="Number" ng-model="StoreIssue.IssueNo" min="0" max="100" step="1" name="IssueNo" class="form-control" placeholder="Issue No" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                </span>
+                                <input type="text" id="Number" ng-model="StoreIssue.ReferenceId" min="0" max="100" step="1" name="IssueNo" class="form-control" placeholder="Reference No" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="ReloadRequestionPurpose()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlPurpose" name="ddlGrade" ng-options="pur.Purpose for pur in RequestionPurposeList track by pur.Id">
+                                    <option value=""> --Purpose --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="ReloadEmployee()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlIssuedFromStore" ng-change="SelectStoreRack(ddlIssuedFromStore)" name="ddlGrade" ng-options="store.StoreName for store in StoreList track by store.Id">
+                                    <option value=""> --Issue From Store --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="ReloadEmployee()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlIssuedByUserId" name="ddlGrade" ng-options="emp.FullName for emp in EmployeeList track by emp.EmployeeId">
+                                    <option value=""> --Issued By --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr />
+                <div class="row" ng-if="ddlIssueType.Id==3||ddlIssueType.Id==13">
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlItem" name="ddlItem" ng-change="IssueRequestion.ddlItem=ddlItem" ng-options="item.Combination for item in ItemList track by item.Id">
+                                    <option value=""> --Select Item--</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-sort-numeric-up"></i></button>
+                                </span>
+                                <input type="number" id="IssuedQty" ng-model="IssueRequestion.IssuedQty" name="IssuedQty" class="form-control" placeholder="Issued Qty">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-sort-numeric-up"></i></button>
+                                </span>
+                                <input type="number" id="IssuedPrice" ng-model="IssueRequestion.IssuedPrice" name="IssuedPrice" class="form-control" placeholder="Issued Price">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="ReloadEmployee()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlRack"  name="ddlGrade" ng-change="IssueRequestion.RackId=ddlRack.Id" ng-options="rack.RackDescription for rack in RackList track by rack.Id">
+                                    <option value=""> --Rack Name --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                  
+
+                </div>
+                <div class="row" ng-if="ddlIssueType.Id==3||ddlIssueType.Id==13" >
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                </span>
+                                <textarea cols="1" rows="1" ng-model="IssueRequestion.Remarks" name="Remarks" class="form-control" placeholder="Remarks">
+
+                                </textarea>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="width:100%" ng-click="addIssueDetail()" class="btn btn-dark">{{addBtn}}</button>
+                    </div>
+                    <div class="col-md-7">
+
+                    </div>
+                </div>
+               
+                 <div class="row" ng-if="issueItemList.length">
+                    <br />
+                    <div class="col-md-12">
+                        <table id="item_table" class="table table-bordered  mb-0 table-centered">
+                            <thead style="background-color:#87b3a6; ">
+                                <tr class="tableHeadCustom">
+                                    <th class="text-center">S/N</th>
+                                    <th class="text-center">Item Name With Description</th>
+
+                                    <th class="text-center" ng-show="ddlIssueType.Id==2 || ddlIssueType.Id==3 ||ddlIssueType.Id==13 "> Price</th>
+                                    <th class="text-center" ng-show="ddlIssueType.Id==2">PB Quantity</th>
+                                    <th class="text-center" ng-show="ddlIssueType.Id==1">Damaged Quantity</th>
+                                    <th class="text-center" ng-show="ddlIssueType.Id==1">Requested Quantity</th>
+
+                                    <th class="text-center" ng-show="ddlIssueType.Id==1">Issued Quantity</th>
+                                    <th class="text-center" ng-show="ddlIssueType.Id==2">Return Quantity</th>
+                                    <th class="text-center">Remarks</th>
+                                </tr>
+                            </thead>
+
+                            <tbody ng-repeat="aPBDetail in issueItemList track by $index">
+                                <tr>
+                                    <td class="text-center">
+                                        {{$index + 1}}
+                                    </td>
+                                    <td class="text-center">
+                                        {{aPBDetail.Combination}}
+                                    </td>
+                                    <td class="text-center" ng-show="ddlIssueType.Id==2 ||ddlIssueType.Id==3 ||ddlIssueType.Id==13 ">
+                                        {{aPBDetail.IssuedPrice}}
+                                        <!--<input type="number" id="PurchaseUnitPrice" style="background-color:white;text-align:right" ng-model="aPBDetail.IssuedPrice" name="PurchaseUnitPrice" class="form-control" placeholder="0.00" readonly>-->
+                                    </td>
+                                    <td class="text-center" ng-show="ddlIssueType.Id==2">
+                                        {{aPBDetail.PurchaseQty}}
+                                        <!--<input type="number" id="PurchaseQty" style="background-color:white;text-align:right" ng-model="aPBDetail.PurchaseQty" name="PurchaseQty" class="form-control" placeholder="0.00" readonly>-->
+                                    </td>
+
+                                    <td class="text-center" ng-show="ddlIssueType.Id==1">
+                                        {{aPBDetail.DamagedItemQty}}
+                                        <!--<input type="number" id="PurchaseUnitPrice" style="background-color:white;text-align:right" ng-model="aPBDetail.DamagedItemQty" name="DamagedQuantity" class="form-control" placeholder="0.00" readonly>-->
+                                    </td>
+                                    <td class="text-center" ng-show="ddlIssueType.Id==1">
+                                        {{aPBDetail.RequestedQty}}
+                                        <!--<input type="number" id="RequestedQty" style="background-color:white;text-align:right" ng-model="aPBDetail.RequestedQty" name="RequestedQty" class="form-control" placeholder="0.00" readonly>-->
+                                    </td>
+                                    <td class="text-center">
+                                     
+                                        <input type="number" id="IssuedQty" style="background-color:white;text-align:right" ng-model="aPBDetail.IssuedQty" name="IssuedQty" class="form-control" placeholder="0.00">
+                                    </td>
+                                    <td class="text-center">
+
+                                        <input type="text" id="Remarks" style="background-color:white;text-align:right" ng-model="aPBDetail.Remarks" name="Remarks" class="form-control" placeholder="Remarks">
+                                    </td>
+
+                                </tr>
+
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+                <br>
+
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <button style="width:100%" ng-click="IssueSave()" class="btn btn-outline-dark">{{btnName}} </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="width:100%" class="btn btn-outline-danger" ng-click="ResetItem()">Reset </button>
+                    </div>
+                </div>
+                <br />
+                <div class="ribbon-1">
+                    <div class="ribbon-box">
+                        <div class="ribbon ribbon-mark" style="background-color:#2d4971 !important;color:white;font-weight:bold">
+                            <i class="fa fa-list-alt" style="font-size:18px;color:white;"></i> Issue List
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                        <input type="text" id="FormDate" ng-model="FormDate" name="FormDate" class="form-control" placeholder="Form Date " readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                        <input type="text" id="ToDate" ng-model="TormDate" name="TormDate" class="form-control" placeholder="To Date" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                        </span>
+                                        <input type="text" id="textUsername" ng-model="SearchItem" name="userName" class="form-control" placeholder="Issue With Date">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <button style="width:100%;" class="btn btn-outline-dark" ng-click="SearchBtn()">Search </button>
+                            </div>
+                            <div class="col-md-2">
+                                <button style="width:100%" class="btn btn-outline-danger" ng-click="ClearBtn()">Clear </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="table-responsive">
+                                    <table id="item_table" class="table table-borderless table-hover mb-0 table-centered">
+                                        <thead style="background-color:#87b3a6; ">
+                                            <tr class="tableHeadCustom">
+                                                <th class="text-center">S/N</th>
+                                                <th class="text-center">Issue No </th>
+                                                <th class="text-center">Issue Date</th>
+                                                <th class="text-center">Reference No</th>
+                                                <th class="text-center">Employee Name</th>
+                                                <th class="text-center">Counter Name</th>
+                                                <th class="text-center">Status</th>
+
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="datatable-buttons" dir-paginate="issue in IssuegepagedList | itemsPerPage: PerPage" current-page="currentPage" total-items="total_count" pagination-id="Item">
+                                                <td class="t-cell-center">{{$index + (( currentPage - 1) * PerPage) + 1}}</td>
+                                                <td class="text-center">{{issue.IssueNo}}</td>
+
+                                                <td class="text-center">{{issue.IssueDate}}</td>
+                                                <td class="text-center">{{issue.ReferenceId}}</td>
+                                                <td class="text-center">{{issue.EmployeeName}}</td>
+                                                <td class="text-center">{{issue.CounterName}}</td>
+                                                <td class="text-center">{{issue.Status}}</td>
+                                                <td class="text-center">
+
+                                                    <!--<button class="btn IconColor" ng-click="UpdatePurchaserRequestion(aPur)">
+                                                        <i class="typcn typcn-edit" style="font-size:22px; color:black"></i>
+                                                    </button>-->
+                                                    <button class="btn IconColor" ng-click="OpenReport(issue.IssueNo)">
+                                                        <i class="typcn typcn-printer" style="font-size:22px; color:black"></i>
+                                                    </button>
+                                                </td>
+
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+                                    <div>
+                                        <hr />
+                                        <div ng-show="total_count >PerPage">
+                                            <div class="btn" style="background-color:#2d4971">
+                                                <dir-pagination-controls max-size="8"
+                                                                         direction-links="true"
+                                                                         boundary-links="true"
+                                                                         on-page-change="getData(newPageNumber)" style="text-align:center;"
+                                                                         pagination-id="Item">
+                                                </dir-pagination-controls>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <br />
+
+
+                                    <div class="row pagination-footer">
+                                        <div class="col-md-6">
+                                            <span>Show </span><input class="input-pagesize" type="number" ng-maxlength="100" ng-minlength="1" width="1" ng-model="PerPage"> <span>Records </span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="pull-right">Showing {{((currentPage-1)*PerPage)+1}} to {{((currentPage-1) * PerPage) + PurchaseRequestionList.length}} of {{total_count}} Records</span>
+                                        </div>
+                                    </div>
+
+                                </div><!--end /tableresponsive-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<h5 class="card-header btn-gradient-primary text-white ">
+        <i class="fa fa-list-alt"></i> Item Setup List
+    </h5>-->
+
+
+            </div><!--end card-body-->
+
+
+        </div><!--end card-->
+
+
+
+    </div><!--end card-->
+</div> <!-- end col -->
+<!--<script src="../Content/assets/js/jquery.min.js"></script>-->
+<!-- Required datatable js -->
+<script src="../Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../Content/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="../Content/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="../Content/assets/plugins/datatables/jszip.min.js"></script>
+<script src="../Content/assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="../Content/assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.print.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.colVis.min.js"></script>
+
+<script src="../Content/assets/js/bootstrap.bundle.min.js"></script>
+<script src="../Content/assets/js/metisMenu.min.js"></script>
+<script src="../Content/assets/js/waves.min.js"></script>
+<script src="../Content/assets/js/jquery.slimscroll.min.js"></script>
+
+
+
+
+<script src="../../../Content/assets/Sample/irregular-data-seriz.js"></script>
+<script src="../../../Content/assets/Sample/ohlc.js"></script>
+
+<link href="../../../Content/ALLItemCustom.css" rel="stylesheet" />
+<link href="../../../Content/PaginationCustom.css" rel="stylesheet" />
+<style>
+
+    .card {
+        margin-bottom: 24px;
+        border: none;
+        -webkit-box-shadow: 0 6px 20px #44b4a1 !important;
+        box-shadow: 0 6px 20px #44b4a1 !important;
+        border-radius: 5px;
+        background-color: #ffffff;
+    }
+
+    .card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border-radius: 0.25rem;
+    }
+
+    .popover {
+        max-width: 354px;
+        word-break: break-all;
+        word-wrap: break-word;
+        width: 115%;
+        max-height: 325px;
+        overflow: auto;
+    }
+
+    .Pagination-And-Report {
+        display: flex;
+        margin-top: 25px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .Only-Report {
+        display: flex;
+        margin-top: 25px;
+        justify-content: end;
+        align-items: center;
+    }
+</style>
+
+<script>
+    $('#IssueDate').bootstrapMaterialDatePicker({
+        format: 'DD-MMM-YYYY',
+        cancelText: 'Descartar',
+        time: false,
+        clearButton: true
+
+    });
+
+    $('#FormDate').bootstrapMaterialDatePicker({
+        format: 'DD-MMM-YYYY',
+        cancelText: 'Descartar',
+        time: false,
+        clearButton: true
+
+    });
+
+    $('#ToDate').bootstrapMaterialDatePicker({
+        format: 'DD-MMM-YYYY',
+        cancelText: 'Descartar',
+        time: false,
+        clearButton: true
+
+    });
+</script>
+
+
+
+

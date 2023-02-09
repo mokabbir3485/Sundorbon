@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{41FAA397-F194-4205-8839-2AD390CD7A6A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sundorbon.Backend</RootNamespace>
+    <AssemblyName>Sundorbon.Backend</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DbExecutor\Common.cs" />
+    <Compile Include="DbExecutor\DBExecutor.cs" />
+    <Compile Include="DbExecutor\DBUtility.cs" />
+    <Compile Include="DbExecutor\error_Log.cs" />
+    <Compile Include="DbExecutor\error_LogBLL.cs" />
+    <Compile Include="DbExecutor\error_LogDAO.cs" />
+    <Compile Include="DbExecutor\IEntityBase.cs" />
+    <Compile Include="DbExecutor\Parameters.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_ApprovalGivenOnBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_ApprovalStatusBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_BranchBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_CounterBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_DepartmentBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_DesignationBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_EmployeeBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_IssueTypeBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_ItemBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_ItemReportBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_ModelBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_PurposeBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_RecordSerialBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_RequisitionTypeBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_StoreBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_StoreRackBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_SupplierBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_TransactionApprovalBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_VATBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_MeasurementUnitBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_ItemGroupBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_LoginLogoutLogBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_VehicleBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ad_VehicleGroupBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\Facade.cs" />
+    <Compile Include="SECURITY\SecurityBLL\inv_AdjustmentBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\inv_AdjustmentDetailsBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\inv_AmendmentBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\inv_StoreIssueBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\inv_StoreIssueDetailsBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\inv_IssueBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\inv_StoreItemReciveBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\p_PurchaseBillBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\inv_StockAuditBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\inv_PurchaseRequisitionBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\inv_PurchaseRequisitionDetailsBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\inv_StockAuditDetailsBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_ModuleBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_PermissionBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_PermissionDetailBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_ReportNotificationDetailBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_RoleBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_ScreenBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_ScreenDetailBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_ScreenLockBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_SystemNotificationBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_UserBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\s_UserDepartmentBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ws_IssueItemBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ws_IssueItemDetailsBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ws_JobBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ws_JobDetailsBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ws_JobItemDetailsBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ws_OutdoorJobBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ws_OutdoorJobDetailsBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ws_OutdoorJobItemDetailsBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ws_RequestionBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ws_StoreItemReceiveBLL.cs" />
+    <Compile Include="SECURITY\SecurityBLL\ws_StoreItemReceiveDetailsBLL.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_ApprovalGivenOnDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_ApprovalStatusDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_BranchDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_CounterDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_DepartmentDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_DesignationDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_EmployeeDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_IssueTypeDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_ItemDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_ItemGroupDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_ItemReportDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_LoginLogoutLogDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_MeasurementUnitDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_ModelDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_MotherCompanyDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_PurposeDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_RecordSerialDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_RequistionTypeDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_StoreDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_StoreRackDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_SupplierDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_TransactionApprovalDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_VATDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_VehicleDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ad_VehicleGroupDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\BaseDAL.cs" />
+    <Compile Include="SECURITY\SecurityDAL\DbProviderHelper.cs" />
+    <Compile Include="SECURITY\SecurityDAL\GenericXmlSerializer.cs" />
+    <Compile Include="SECURITY\SecurityDAL\inv_AdjustmentDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\inv_AdjustmentDetailsDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\inv_AmendmentDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\inv_StockAuditDetailsDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\inv_PurchaseRequisitionDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\inv_PurchaseRequisitionDetailsDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\inv_StockAuditDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\inv_StoreIssueDetailsDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\inv_StoreIssuesDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\inv_StoreIssueDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\p_PurchaseBillDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\p_PurchaseBillDetailsDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\inv_StoreItemReceiveDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_ModuleDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_PermissionDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_PermissionDetailDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_ReportNotificationDetailDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_RoleDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_ScreenDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_ScreenDetailDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_ScreenLockDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_SystemNotificationDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_UserDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\s_UserDepartmentDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ws_IssueItemDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ws_IssueItemDetailsDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ws_JobDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ws_JobDetailsDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ws_JobItemDetailsDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ws_OutdoorJobDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ws_OutdoorJobDetailsDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ws_OutdoorJobItemDetailsDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ws_RequestionDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ws_StoreItemReceiveDAO.cs" />
+    <Compile Include="SECURITY\SecurityDAL\ws_StoreItemReceiveDetailDAO.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_ApprovalGivenOn.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_ApprovalStatus.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Branch.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Counter.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Depertment.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Designation.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Employee.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Get_Supplier.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Grade.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_IssueType.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Item.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_ItemGroup.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_ItemReport.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_LoginLogoutLog.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_MeasurementUnit.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Model.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_MotherCompany.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Purpose.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_RecordSerial.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_RequistionType.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Section.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Store.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_StoreIssue.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_StoreRack.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Supplier.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_TransactionApproval.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_VAT.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_Vehicle.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_VehicleGroup.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ad_RequestionPurpose.cs" />
+    <Compile Include="SECURITY\SecurityEntity\Amendment.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_Adjustment.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_AdjustmentDetails.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_Ammendment.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_AmmendmentDetails.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_PR_Amend_Report.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_PurchaseRequisition.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_PurchaseRequisitionDetails.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_StockAudit.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_StockAuditDetails.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_StoreIssueDetails.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_StoreIssueDetail.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ItemAndItemAdditionalAttribute.cs" />
+    <Compile Include="SECURITY\SecurityEntity\pay_MobileBankingService.cs" />
+    <Compile Include="SECURITY\SecurityEntity\p_PurchaseBill.cs" />
+    <Compile Include="SECURITY\SecurityEntity\p_PurchaseBillDetails.cs" />
+    <Compile Include="SECURITY\SecurityEntity\Rpt_MonthYear.cs" />
+    <Compile Include="SECURITY\SecurityEntity\SorterMode.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_StoreItemReceive.cs" />
+    <Compile Include="SECURITY\SecurityEntity\inv_StoreItemReceiveDetail.cs" />
+    <Compile Include="SECURITY\SecurityEntity\sysdiagrams.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_Module.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_Permission.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_PermissionDetail.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_ReportNotificationDetail.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_Role.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_Screen.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_ScreenDetail.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_ScreenLock.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_SystemNotification.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_User.cs" />
+    <Compile Include="SECURITY\SecurityEntity\s_UserDepartment.cs" />
+    <Compile Include="SECURITY\SecurityEntity\TransactionApproveTablename.cs" />
+    <Compile Include="SECURITY\SecurityEntity\Utilities.cs" />
+    <Compile Include="SECURITY\SecurityEntity\wsOutDoorJobDetails.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ws_IssueItem.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ws_IssueItemDetails.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ws_Job.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ws_JobDetails.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ws_JobItemDetails.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ws_OutdoorJob.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ws_OutdoorJobItemDetails.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ws_RequestionSlipDetails.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ws_Requestion.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ws_StoreItemReceive.cs" />
+    <Compile Include="SECURITY\SecurityEntity\ws_StoreItemReceiveDetails.cs" />
+    <Compile Include="SECURITY\SecurityEntity\xrpt_inv_PurchaseRequisition.cs" />
+    <Compile Include="SECURITY\SecurityEntity\xrpt_p_PurchaseBillDetail.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

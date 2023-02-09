@@ -1,0 +1,130 @@
+﻿@{
+    Layout = null;
+}
+
+<head>
+    <title>Power Up</title>
+    @Scripts.Render("~/bundles/spa")
+    @Scripts.Render("~/Content/css")
+    <link href="~/Content/LandingAssets/css/main.css" rel="stylesheet" />
+
+    <title>Power Up</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="shortcut icon" href="~/Content/assets/images/logoBackLess.png">
+
+    <script src="~/Scripts/jquery-2.2.3.min.js"></script>
+    <script src="~/Scripts/jquery.dropotron.min.js"></script>
+    <script src="~/Scripts/jquery.scrollex.min.js"></script>
+    <script src="~/Scripts/browser.min.js"></script>
+    <script src="~/Scripts/breakpoints.min.js"></script>
+    <script src="~/Scripts/util.js"></script>
+    @*<script src="~/Scripts/main.js"></script>*@
+    @*<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>*@
+
+
+
+    <script src="~/SPA/app.js"></script>
+    <script src="~/SPA/LandingPage/LandingPageController.js"></script>
+    <script src="~/SPA/IndexController.js"></script>
+
+    <!-- App favicon -->
+    @*<link rel="shortcut icon" href="../Content/assets/images/favicon.ico">*@
+
+    <!-- For SignalR Start -->
+    <!-- JQuery Used From spa Bundle Version 1.10.2 -->
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="/signalr/hubs"></script>
+    <!-- For SignalR End -->
+
+
+</head>
+<body class="landing is-preload" ng-app="AngularDemoApp" ng-controller="IndexController" ng-view>
+    @*<div ng-view>
+
+    </div>*@
+
+</body>
+
+<script>
+    
+    
+    (function ($) {
+
+        var $window = $(window),
+            $body = $('body'),
+            $header = $('#header'),
+            $banner = $('#banner');
+
+        // Breakpoints.
+        breakpoints({
+            wide: ('1281px', '1680px'),
+            normal: ('981px', '1280px'),
+            narrow: ('737px', '980px'),
+            narrower: ('737px', '840px'),
+            mobile: ('481px', '736px'),
+            mobilep: (null, '480px')
+        });
+
+        // Play initial animations on page load.
+        $window.on('load', function () {
+            window.setTimeout(function () {
+                $body.removeClass('is-preload');
+            }, 100);
+        });
+
+        // Dropdowns.
+        $('#nav > ul').dropotron({
+            alignment: 'right'
+        });
+
+        // NavPanel.
+
+        // Button.
+        $(
+            '<div id="navButton">' +
+            '<a href="#navPanel" class="toggle"></a>' +
+            '</div>'
+        )
+            .appendTo($body);
+
+        // Panel.
+        $(
+            '<div id="navPanel">' +
+            '<nav>' +
+            $('#nav').navList() +
+            '</nav>' +
+            '</div>'
+        )
+            .appendTo($body)
+            .panel({
+                delay: 500,
+                hideOnClick: true,
+                hideOnSwipe: true,
+                resetScroll: true,
+                resetForms: true,
+                side: 'left',
+                target: $body,
+                visibleClass: 'navPanel-visible'
+            });
+
+        // Header.
+        if (!browser.mobile
+            && $header.hasClass('alt')
+            && $banner.length > 0) {
+
+            $window.on('load', function () {
+
+                $banner.scrollex({
+                    bottom: $header.outerHeight(),
+                    terminate: function () { $header.removeClass('alt'); },
+                    enter: function () { $header.addClass('alt reveal'); },
+                    leave: function () { $header.removeClass('alt'); }
+                });
+
+            });
+
+        }
+
+    })(jQuery);
+</script>

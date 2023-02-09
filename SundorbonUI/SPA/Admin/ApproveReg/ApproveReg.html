@@ -1,0 +1,111 @@
+﻿<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            margin: 4px;
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+</style>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb" id="navigationUrlHide">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Power Up</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Approve Register</a></li>
+                    <!--<li class="breadcrumb-item active">Battery Status</li>-->
+                </ol>
+            </div>
+            <h4 class="page-title">Approve Register</h4>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+</div><!--end row-->
+<!-- end page title end breadcrumb -->
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered mb-0 table-centered">
+                    <thead>
+                        <tr>
+                            <th class="text-center">ID</th>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Address</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Status</th>
+                            <th class="text-center" colspan="3">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="aApprove in ApproveList">
+                            <td class="text-center">{{aApprove.id}}</td>
+                            <td class="text-center">{{aApprove.Name}}</td>
+                            <td class="text-center">{{aApprove.Address}}</td>
+                            <td class="text-center">{{aApprove.Email}}</td>
+                            <td class="text-center">
+                                <span class="badge badge-soft-success" ng-if="aApprove.Status == true">Approved</span>
+                                <span class="badge badge-soft-danger" ng-if="aApprove.Status == false">Rejected</span>
+                            </td>
+                            <td class="text-center" style="border-right:hidden">
+                                <button class="btn btn-secondary" ng-click="">Approve</button>
+                            </td>
+                            <td class="text-center" style="border-right: hidden">
+                                <button class="btn btn-gradient-danger" data-toggle="modal" data-animation="bounce" data-target=".bs-example-modal-lg" ng-click="">Reject</button>
+                            </td>
+                            <td class="text-center" >
+                                <button class="btn btn-primary" ng-click="">Info</button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </table><!--end /table-->
+            </div><!--end /tableresponsive-->
+        </div><!--end card-body-->
+    </div><!--end card-->
+</div> <!-- end col -->
+
+
+<!--  Modal content for the above example -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title mt-0" id="myLargeModalLabel">Enter Reject Reason</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <!--<div class="col-md-2">
+
+                        </div>-->
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <!--<label for="Location">Reject Reason</label>-->
+                                <textarea type="text" class="form-control" rows="3" id="Reason" required=""></textarea>
+                            </div>
+                        </div>
+                        <!--<div class="col-md-2">
+
+                        </div>-->
+                    </div>
+                    <div class="row" style="float:right">
+                        <button type="button" class="btn btn-success" style="margin-right:10px" data-dismiss="modal">Submit</button>
+                        <button type="button" class="btn btn-sm btn-gradient-danger" style="margin-right:10px" data-dismiss="modal">Cancel</button>
+                    </div>
+                        
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

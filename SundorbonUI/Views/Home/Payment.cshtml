@@ -1,0 +1,174 @@
+﻿
+@*<style>
+    @@media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+
+
+        #imageWidth {
+            width: 100%;
+            height: 100px;
+            margin-top:5px;
+        }
+    }
+</style>*@
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Power Up</title>
+    @Scripts.Render("~/bundles/spa")
+    @Scripts.Render("~/Content/css")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A premium admin dashboard template by Mannatthemes" name="description" />
+    <meta content="Mannatthemes" name="author" />
+
+    <script src="~/SPA/app.js"></script>
+    <script src="~/SPA/Login/LoginController.js"></script>
+    <script src="~/SPA/IndexController.js"></script>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../Content/assets/images/favicon.ico">
+
+    @*<link href="../Content/assets/plugins/jvectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet">*@
+
+    <!-- App css -->
+    <!-- App css -->
+    <link href="../Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="../Content/assets/css/style.css" rel="stylesheet" type="text/css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="A premium admin dashboard template by Mannatthemes" name="description" />
+    <meta content="Mannatthemes" name="author" />
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="../Content/assets/images/favicon.ico">
+
+
+
+</head>
+
+<body ng-app="AngularDemoApp" ng-controller="IndexController">
+
+    <section class="content">
+        <div class="row">
+            <br /><br /><br />
+      
+            <div class="col-md-12">
+                <div ng-view>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <script src="../Content/assets/js/jquery.min.js"></script>
+    <script src="../Content/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="../Content/assets/js/metisMenu.min.js"></script>
+    <script src="../Content/assets/js/waves.min.js"></script>
+    <script src="../Content/assets/js/jquery.slimscroll.min.js"></script>
+
+    <script src="../Content/assets/plugins/moment/moment.js"></script>
+
+    <!-- For SignalR Start -->
+    <!-- JQuery Used From spa Bundle Version 1.10.2 -->
+    <script src="~/Scripts/jquery.signalR-2.4.3.min.js"></script>
+    <script src="/signalr/hubs"></script>
+    <!-- For SignalR End -->
+
+
+    <script>
+        (function ($) {
+
+            'use strict';
+
+            function initSlimscroll() {
+                $('.slimscroll').slimscroll({
+                    height: 'auto',
+                    position: 'right',
+                    size: "7px",
+                    color: '#e0e5f1',
+                    opacity: 1,
+                    wheelStep: 5,
+                    touchScrollStep: 50
+                });
+            }
+
+
+            function initMetisMenu() {
+                //metis menu
+                $(".metismenu").metisMenu();
+            }
+
+            function initLeftMenuCollapse() {
+                // Left menu collapse
+                $('.button-menu-mobile').on('click', function (event) {
+                    event.preventDefault();
+                    $("body").toggleClass("enlarge-menu");
+                    initSlimscroll();
+                });
+            }
+
+            function initEnlarge() {
+                if ($(window).width() < 1025) {
+                    $('body').addClass('enlarge-menu');
+                } else {
+                    if ($('body').data('keep-enlarged') != true)
+                        $('body').removeClass('enlarge-menu');
+                }
+            }
+
+            function initTooltipPlugin() {
+                $.fn.tooltip && $('[data-toggle="tooltip"]').tooltip()
+            }
+
+
+
+            function initActiveMenu() {
+                // === following js will activate the menu in left side bar based on url ====
+                $(".left-sidenav a").each(function () {
+                    var pageUrl = window.location.href.split(/[?#]/)[0];
+                    if (this.href == pageUrl) {
+                        $(this).addClass("active");
+                        $(this).parent().addClass("active"); // add active to li of the current link
+                        $(this).parent().parent().addClass("in");
+                        $(this).parent().parent().addClass("mm-show");
+                        $(this).parent().parent().parent().addClass("mm-active");
+                        $(this).parent().parent().prev().addClass("active"); // add active class to an anchor
+                        $(this).parent().parent().parent().addClass("active");
+                        $(this).parent().parent().parent().parent().addClass("mm-show"); // add active to li of the current link
+                        $(this).parent().parent().parent().parent().parent().addClass("mm-active");
+
+                    }
+                });
+            }
+
+
+
+            function init() {
+                initSlimscroll();
+                initMetisMenu();
+                initLeftMenuCollapse();
+                initEnlarge();
+                initTooltipPlugin();
+                initActiveMenu();
+                Waves.init();
+            }
+
+            init();
+
+        })(jQuery)
+
+    </script>
+</body>
+</html>

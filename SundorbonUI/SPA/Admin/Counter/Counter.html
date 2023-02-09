@@ -1,0 +1,372 @@
+﻿
+<link href="../Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/icons.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/style.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/ToasterWithBtnAndRibonCustom.css" rel="stylesheet" type="text/css" />
+
+<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            margin: 4px;
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+</style>
+
+<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            margin: 4px;
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+</style>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb" id="navigationUrlHide">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Sundarban</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Admin </a></li>
+                    <li class="breadcrumb-item active">Counter</li>
+                </ol>
+            </div>
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+
+</div><!--end row-->
+<div class="col-lg-12">
+
+    <div class="card">
+        <h4 class="card-header  text-white mt-0 PalelColor">
+            <i class="mdi mdi-format-list-bulleted-type"></i> Counter
+        </h4>
+        
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                            </span>
+                            <input type="text" id="textUsername" ng-model="ad_Counter.CounterName" name="userName" class="form-control" placeholder="Counter Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <!--<span class="input-group-prepend">
+                                <button type="button" class="btn IconColor"><i class="fa fa-caret-down"></i></button>
+                            </span>-->
+                            <span class="input-group-prepend">
+                                <button type="button" class="btn IconColor" ng-click="ReloadDept()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                            </span>
+                            <select class="form-control" ng-model="ddlDepartments" ng-options="Departments.DepartmentName for Departments in DepartmentList track by Departments.Id">
+                                <option value=""> --Select Department--</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                            </span>
+                            <!--<input type="text" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">-->
+                            <input type="text" id="textUsername" ng-model="ad_Counter.IPAddress" name="userName" class="form-control" placeholder="IPAddress">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-prepend">
+                                <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                            </span>
+                            <input type="text" id="textUsername" ng-model="ad_Counter.ShortCode" name="userName" class="form-control" placeholder="ShortCode">
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <!--<br />-->
+            <div class="row">
+                <div class="col-md-2">
+                    <button style="width:100%" ng-click="CounterSave()" class="btn  btn-outline-dark">{{button}}</button>
+                </div>
+                <div class="col-md-2">
+                    <button style="width:100%" class="btn btn-outline-danger" ng-click="ClearBtn()">Reset</button>
+                </div>
+            </div>
+           <!-- <br />-->
+            <br />
+            <div class="ribbon-1">
+                <div class="ribbon-box">
+
+                    <div class="ribbon ribbon-mark" style="background-color:#2d4971 !important;color:white;font-weight:bold">
+                        <i class="fa fa-list-alt" style="font-size:18px;color:white;"></i> Counter List
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+
+                        </div>
+                        <div class="col-md-4">
+
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-prepend">
+                                        <button type="button" class="btn  IconColor"><i class="fa fa-text-width"></i></button>
+                                    </span>
+                                    <input type="text" id="textUsername" name="userName" ng-model="SearchItem" class="form-control" placeholder="Department Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button style="width:100%" class="btn btn-outline-dark" ng-click="SearchBtn()">Search </button>
+                        </div>
+                        <div class="col-md-2">
+                            <button style="width:100%" class="btn  btn-outline-danger" ng-click="ClearBtn()">Clear </button>
+                        </div>
+                    </div>
+                    <!--<hr />-->
+                    <div class="table-responsive">
+                        <table class="table table-borderless mb-0 table-centered">
+                            <thead>
+                                <tr style="background-color:#87b3a6; ">
+                                    <th class="text-center">S/N</th>
+                                    <th class="text-center">Counter Name</th>
+                                    <th class="text-center">DepartmentName</th>
+                                    <th class="text-center">IPAddress</th>
+                                    <th class="text-center">ShortCode</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr dir-paginate="aCounter in CounterList | filter:q | itemsPerPage: PerPage" current-page="currentPage" total-items="total_count" pagination-id="Item">
+                                    <td class="text-center">{{$index + (( currentPage - 1) * PerPage) + 1}}</td>
+                                    <td class="text-center">{{aCounter.CounterName}}</td>
+                                    <td class="text-center">{{aCounter.DepartmentName}}</td>
+                                    <td class="text-center">{{aCounter.IPAddress}}</td>
+                                    <td class="text-center">{{aCounter.ShortCode}}</td>
+                                    <td class="text-center">
+                                        <button class="btn IconColor" ng-click="UpdateItem(aCounter)">
+                                            <i class="typcn typcn-edit" style="font-size:22px; color:black"></i>
+                                        </button>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table><!--end /table-->
+                        <div ng-show="total_count>PerPage">
+                            <hr />
+                            <div style="background-color:#2d4971" class="btn">
+                                <dir-pagination-controls max-size="8"
+                                                         direction-links="true"
+                                                         boundary-links="true"
+                                                         on-page-change="getData(newPageNumber)" style="text-align:center;"
+                                                         pagination-id="Item">
+                                </dir-pagination-controls>
+                            </div>
+                        </div>
+
+                        <br />
+                        <br />
+                        <div class="row pagination-footer">
+                            <div class="col-md-6">
+                                <span>Show </span><input class="input-pagesize" type="number" min="1" max="100" step="1" ng-maxlength="100" ng-minlength="1" width="1" ng-model="PerPage"> <span>Records </span>
+                            </div>
+                            <div class="col-md-6">
+                                <span class="pull-right">Showing {{((currentPage-1)*PerPage)+1}} to {{((currentPage-1) * PerPage) + CounterList.length}} of {{total_count}} Records</span>
+                            </div>
+                        </div>
+                    </div><!--end /tableresponsive-->
+                </div>
+            </div>
+            <!--<h5 class="card-header  text-white ">
+                <i class="fa fa-list-alt"></i> Item Setup List
+            </h5>-->
+
+
+        </div><!--end card-body-->
+
+
+    </div><!--end card-->
+
+
+
+</div><!--end card-->
+<!--<div class="container-fluid">
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5">
+
+                        <h4 class="card-header  text-white mt-0 PalelColor">
+                            <i class="mdi mdi-format-list-bulleted-type"></i> Counter
+                        </h4>
+                        <hr />
+
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                </span>
+                                <input type="text" id="textUsername" ng-model="ad_Counter.CounterName" name="userName" class="form-control" placeholder="Counter Name">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-caret-down"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlDepartments" ng-options="Departments.DepartmentName for Departments in DepartmentList track by Departments.Id">
+                                    <option value=""> --Select Department--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                </span>-->
+<!--<input type="text" minlength="7" maxlength="15" size="15" pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">-->
+<!--<input type="text" id="textUsername" ng-model="ad_Counter.IPAddress" name="userName" class="form-control" placeholder="IPAddress">
+                    <span class="input-group-prepend">
+                        <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                    </span>
+                    <input type="text" id="textUsername" ng-model="ad_Counter.ShortCode" name="userName" class="form-control" placeholder="ShortCode">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button style="width:100%" ng-click="CounterSave()" class="btn  btn-outline-dark">{{button}}</button>
+                </div>
+                <div class="col-md-6">
+                    <button style="width:100%" class="btn btn-outline-danger" ng-click="ClearBtn()">Reset</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-md-7">
+
+        </div>
+    </div>
+
+</div>-->
+<!--end card-body-->
+<!--</div>--><!--end card-->
+<!--</div>--> <!-- end col -->
+<!--</div>--> <!-- end row -->
+<!-- end page title end breadcrumb -->
+<!-- end page title end breadcrumb -->
+<div class="row">
+
+</div>
+
+
+
+
+<!--<script src="../Content/assets/js/jquery.min.js"></script>-->
+<!--<script src="../Content/assets/js/jquery.min.js"></script>-->
+<!-- Required datatable js -->
+<script src="../Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../Content/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="../Content/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="../Content/assets/plugins/datatables/jszip.min.js"></script>
+<script src="../Content/assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="../Content/assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.print.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.colVis.min.js"></script>
+
+<script src="../Content/assets/js/bootstrap.bundle.min.js"></script>
+<script src="../Content/assets/js/metisMenu.min.js"></script>
+<script src="../Content/assets/js/waves.min.js"></script>
+<script src="../Content/assets/js/jquery.slimscroll.min.js"></script>
+
+
+
+
+<script src="../../../Content/assets/Sample/irregular-data-seriz.js"></script>
+<script src="../../../Content/assets/Sample/ohlc.js"></script>
+
+<link href="../../../Content/ALLItemCustom.css" rel="stylesheet" />
+<link href="../../../Content/PaginationCustom.css" rel="stylesheet" />
+<style>
+
+    .card {
+        margin-bottom: 24px;
+        border: none;
+        -webkit-box-shadow: 0 6px 20px #44b4a1 !important;
+        box-shadow: 0 6px 20px #44b4a1 !important;
+        border-radius: 5px;
+        background-color: #ffffff;
+    }
+
+    .card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border-radius: 0.25rem;
+    }
+
+    .popover {
+        max-width: 354px;
+        word-break: break-all;
+        word-wrap: break-word;
+        width: 115%;
+        max-height: 325px;
+        overflow: auto;
+    }
+
+    .Pagination-And-Report {
+        display: flex;
+        margin-top: 25px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .Only-Report {
+        display: flex;
+        margin-top: 25px;
+        justify-content: end;
+        align-items: center;
+    }
+</style>
+
+

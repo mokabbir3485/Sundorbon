@@ -1,0 +1,29 @@
+﻿
+.ribbon-1 .ribbon.ribbon-mark::before {
+    border-color: #2d4971 transparent #2d4971 #2d4971 !important;
+    border-image: initial;
+    color:white;
+}
+
+.BtnCustomColor {
+    background-color: #52ad9c !important;
+}
+
+.toast {
+    background-color: red !important;
+    color: black;
+}
+
+.toast-success {
+    background-color: #00cc66 !important;
+    color: white;
+}
+
+.tableHeadCustom {
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    font-size: 16px;
+    
+}
+

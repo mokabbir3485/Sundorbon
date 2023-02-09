@@ -1,0 +1,629 @@
+﻿
+<link href="../Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/icons.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/style.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/ToasterWithBtnAndRibonCustom.css" rel="stylesheet" type="text/css" />
+
+<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            margin: 4px;
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+</style>
+
+
+<!-- end page title end breadcrumb -->
+<!-- end page title end breadcrumb -->
+<div class="container-fluid">
+
+    <div class="col-lg-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb" id="navigationUrlHide">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Sundarban</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Workshop </a></li>
+                    <li class="breadcrumb-item active">Job</li>
+                </ol>
+            </div>
+
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+    <br />
+
+    <div class="col-lg-12">
+
+        <div class="card">
+
+            <h4 class="card-header  text-white mt-0 PalelColor">
+                <i class="mdi mdi-format-list-bulleted-type"></i> Job
+
+            </h4>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-calendar"></i></button>
+                                </span>
+                                <input type="text" id="RequisitionDate" ng-model="Job.JobDate" name="RequisitionDate" class="form-control" placeholder="Job.Date (dd/mm/yy)" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+
+                                </span>
+                                <input type="text" id="Number" ng-model="Job.Number" min="0" max="100" step="1" name="RequisitionNumber" class="form-control" placeholder="Requisition Number" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="ReloadVehicle()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlVehicle" name="ddlGrade" ng-options="Vehicle.VehicleNo for Vehicle in VehicleList track by Vehicle.Id">
+                                    <option value=""> --Vehicle No --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="ReloadEmployee()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlEmployee" name="ddlGrade" ng-options="emp.FullName for emp in EmployeeList track by emp.EmployeeId">
+                                    <option value=""> --Requested By Employee --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="ReloadPurpose()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlPurpose" name="ddlGrade" ng-options="Purpose.Purpose for Purpose in PurposeList track by Purpose.Id">
+                                    <option value=""> --Purpose --</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <textarea cols="1" rows="1" ng-model="Job.DriverInformation" class="form-control" placeholder="Driver Information"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <textarea cols="1" rows="1" type="text" ng-model="Job.Remarks" class="form-control" placeholder="Remarks" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="JobDetailsList">
+                    <div class="JobDetailsListEnrty">
+                        <div class="ribbon ribbon-mark" style="background-color:#2d4971 !important;color:white;font-weight:600;">
+                            <i class="fa fa-list-alt" style="font-size:18px;color:white;"></i> Add Job Details
+                        </div>
+                        <br />
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                        </span>
+                                        <textarea cols="1" rows="1" ng-model="JobDetails.WorkDetails" name="RequestedQty" class="form-control" placeholder="Work Details"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <button style="width:100%" ng-click="addJobDetails()" class="btn btn-dark">{{addBtn}}</button>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table id="item_table" class="table table-borderless table-hover mb-0 table-centered">
+                                        <thead style="background-color:#87b3a6; ">
+                                            <tr class="tableHeadCustom">
+                                                <th class="text-center">S/N</th>
+                                                <th class="text-center">Work Details</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="datatable-buttons" dir-paginate="aJob in JobDetailsList | itemsPerPage: samplePerPage" current-page="samplecurrentPage" total-items="TotalLength" pagination-id="SamplePage">
+
+                                                <td class="text-center">
+                                                    {{$index + ((samplecurrentPage -1) * samplePerPage) + 1}}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{aJob.WorkDetails}}
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-dark" ng-disabled="!aJob.Id" ng-click="DetailRowEdit(aJob)">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-dark" ng-disabled="aJob.Id" ng-click="Remove(aJob)">
+                                                        <i class="fa fa-minus"></i>
+                                                    </button>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <hr />
+                                    <div ng-show="TotalLength>samplePerPage" class=" btn " style="background-color:#2d4971">
+                                        <dir-pagination-controls max-size="8"
+                                                                 direction-links="true"
+                                                                 boundary-links="true"
+                                                                 on-page-change="GetSampleDate(newPageNumber)" style="text-align:center;"
+                                                                 pagination-id="SamplePage">
+                                        </dir-pagination-controls>
+
+                                    </div>
+                                    <div style="float:right">
+                                        <span ng-show="TotalLength>samplePerPage" class="text-right" style="color:black;">Showing <span> {{((samplecurrentPage-1)*samplePerPage)+1}}</span>  to {{((samplecurrentPage-1) * samplePerPage) + JobDetailsList.length}} of {{TotalLength}} Records</span>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--JobItemDetails start-->
+                <div class="JobDetailsList" style="margin-bottom: 15px;">
+                    <div class="JobDetailsListEnrty">
+                        <div class="ribbon ribbon-mark" style="background-color:#2d4971 !important;color:white;font-weight:600;">
+                            <i class="fa fa-list-alt" style="font-size:18px;color:white;"></i> Add Job Item Details
+                        </div>
+                        <br />
+                        <div class="row">
+
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor" ng-click="ReloadItem()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                        </span>
+                                        <select class="form-control" ng-model="ddlItem" name="ddlGrade" ng-options="item.Combination for item in ItemList track by item.Id">
+                                            <option value=""> --Select Item--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="number" ng-model="JobItemDetails.ItemRequiredFromStoreQty" min="0" ng-change="SetItemRequiredFromStoreQty()" class="form-control" placeholder="Item Required From Store Qty " />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="number" ng-model="JobItemDetails.ItemReusableQty" min="0" max="{{MaxValue}}" ng-change="SetItemReusableQty()" class="form-control" placeholder="Item Reusable Qty" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="number" ng-model="JobItemDetails.ItemDamagedQty" min="0" max="{{MaxValue}}" ng-change="SetItemDamagedQty()" class="form-control" placeholder="Item Damaged Qty" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <textarea cols="1" rows="1" type="text" ng-model="JobItemDetails.Remarks" class="form-control" placeholder="Remarks" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <button style="width:100%" ng-click="addJobItemDetails()" class="btn btn-dark">{{addJobItemDetailsBtn}}</button>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <table id="item_table" class="table table-borderless table-hover mb-0 table-centered">
+                                        <thead style="background-color:#87b3a6; ">
+                                            <tr class="tableHeadCustom">
+                                                <th class="text-center">S/N</th>
+                                                <th class="text-center">Item</th>
+                                                <th class="text-center">Item Required From Store Qty</th>
+                                                <th class="text-center">Item Reusable Qty</th>
+                                                <th class="text-center">Item Damaged Qty</th>
+                                                <th class="text-center">Remarks</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="datatable-buttons" dir-paginate="aJob in JobItemDetailsList | itemsPerPage: ItemsamplePerPage" current-page="ItemsamplecurrentPage" total-items="ItemTotalLength" pagination-id="ItemSamplePage">
+
+                                                <td class="text-center">
+                                                    {{$index + ((ItemsamplecurrentPage -1) * ItemsamplePerPage) + 1}}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{aJob.Combination}}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{aJob.ItemRequiredFromStoreQty}}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{aJob.ItemReusableQty}}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{aJob.ItemDamagedQty}}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{aJob.Remarks}}
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-dark" ng-disabled="!aJob.Id" ng-click="ItemDetailRowEdit(aJob)">
+                                                        <i class="fa fa-edit"></i>
+                                                    </button>
+                                                    <button class="btn btn-dark" ng-disabled="aJob.Id" ng-click="RemoveItem(aJob)">
+                                                        <i class="fa fa-minus"></i>
+                                                    </button>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <hr />
+                                    <div ng-show="ItemTotalLength>ItemsamplePerPage" class=" btn " style="background-color:#2d4971">
+                                        <dir-pagination-controls max-size="8"
+                                                                 direction-links="true"
+                                                                 boundary-links="true"
+                                                                 on-page-change="GetSampleItem(newPageNumber)" style="text-align:center;"
+                                                                 pagination-id="ItemSamplePage">
+                                        </dir-pagination-controls>
+
+                                    </div>
+                                    <div style="float:right">
+                                        <span ng-show="ItemTotalLength>ItemsamplePerPage" class="text-right" style="color:black;">Showing <span> {{((ItemsamplecurrentPage-1)*ItemsamplePerPage)+1}}</span>  to {{((ItemsamplecurrentPage-1) * ItemsamplePerPage) + JobItemDetailsList.length}} of {{ItemTotalLength}} Records</span>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--JobItemDetails End-->
+                <div class="row">
+
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <button style="width:100%" ng-click="JobSave()" class="btn btn-outline-dark">{{btnName}} </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="width:100%" class="btn btn-outline-danger" ng-click="ResetItem()">Reset </button>
+                    </div>
+                </div>
+                <br />
+                <div class="ribbon-1">
+                    <div class="ribbon-box">
+                        <div class="ribbon ribbon-mark" style="background-color:#2d4971 !important;color:white;font-weight:bold">
+                            <i class="fa fa-list-alt" style="font-size:18px;color:white;"></i> Job List
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                        <input type="text" id="FormDate" ng-model="FormDate" name="FormDate" class="form-control" placeholder="Form Date " readonly>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-calendar"></i></button>
+                                        </span>
+                                        <input type="text" id="ToDate" ng-model="TormDate" name="TormDate" class="form-control" placeholder="To Date" readonly>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <span class="input-group-prepend">
+                                            <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                        </span>
+                                        <input type="text" id="textUsername" ng-model="SearchItem" name="userName" class="form-control" placeholder="Job Number">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <button style="width:100%;" class="btn btn-outline-dark" ng-click="SearchBtn()">Search </button>
+                            </div>
+                            <div class="col-md-2">
+                                <button style="width:100%" class="btn btn-outline-danger" ng-click="ClearBtn()">Clear </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+
+                                <div class="table-responsive">
+                                    <table id="item_table" class="table table-borderless table-hover mb-0 table-centered">
+                                        <thead style="background-color:#87b3a6; ">
+                                            <tr class="tableHeadCustom">
+                                                <th class="text-center">S/N</th>
+                                                <th class="text-center">Job No </th>
+                                                <th class="text-center">Job Date</th>
+                                                <th class="text-center">Employee Name</th>
+                                                <th class="text-center">Purpose</th>
+                                                <th class="text-center">VehicleNo</th>
+                                                <th class="text-center">DriverInformation</th>
+                                                <th class="text-center">Remarks</th>
+                                                <th class="text-center">Counter Name</th>
+                                                <th class="text-center">Status</th>
+                                                <th class="text-center">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="datatable-buttons" dir-paginate="aPur in JobList | itemsPerPage: PerPage" current-page="currentPage" total-items="total_count" pagination-id="Item">
+                                                <td class="t-cell-center">{{$index + (( currentPage - 1) * PerPage) + 1}}</td>
+                                                <td class="text-center">{{aPur.Number}}</td>
+                                                <td class="text-center">{{aPur.JobDate}}</td>
+                                                <td class="text-center">{{aPur.Combination}}</td>
+                                                <td class="text-center">{{aPur.Purpose}}</td>
+                                                <td class="text-center">{{aPur.VehicleNo}}</td>
+                                                <td class="text-center">{{aPur.DriverInformation}}</td>
+                                                <td class="text-center">{{aPur.Remarks}}</td>
+                                                <td class="text-center">{{aPur.CounterName}}</td>
+                                                <td class="text-center">{{aPur.Status}}</td>
+                                                <td class="text-center">
+
+                                                    <button class="btn IconColor" ng-click="UpdateJob(aPur)">
+                                                        <i class="typcn typcn-edit" style="font-size:22px; color:black"></i>
+                                                    </button>
+                                                    <!--<button class="btn IconColor" ng-click="OpenReport(aPur.Number)">
+                                                        <i class="typcn typcn-printer" style="font-size:22px; color:black"></i>
+                                                    </button>-->
+                                                </td>
+
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+
+                                    <div>
+                                        <hr />
+                                        <div ng-show="total_count >PerPage">
+                                            <div class="btn" style="background-color:#2d4971">
+                                                <dir-pagination-controls max-size="8"
+                                                                         direction-links="true"
+                                                                         boundary-links="true"
+                                                                         on-page-change="getData(newPageNumber)" style="text-align:center;"
+                                                                         pagination-id="Item">
+                                                </dir-pagination-controls>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <br />
+
+
+                                    <div class="row pagination-footer">
+                                        <div class="col-md-6">
+                                            <span>Show </span><input class="input-pagesize" type="number" ng-maxlength="100" ng-minlength="1" width="1" ng-model="PerPage"> <span>Records </span>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <span class="pull-right">Showing {{((currentPage-1)*PerPage)+1}} to {{((currentPage-1) * PerPage) + JobList.length}} of {{total_count}} Records</span>
+                                        </div>
+                                    </div>
+
+                                </div><!--end /tableresponsive-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<h5 class="card-header btn-gradient-primary text-white ">
+        <i class="fa fa-list-alt"></i> Item Setup List
+    </h5>-->
+
+
+            </div><!--end card-body-->
+
+
+        </div><!--end card-->
+
+
+
+    </div><!--end card-->
+</div> <!-- end col -->
+<!--<script src="../Content/assets/js/jquery.min.js"></script>-->
+<!-- Required datatable js -->
+<script src="../Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../Content/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="../Content/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="../Content/assets/plugins/datatables/jszip.min.js"></script>
+<script src="../Content/assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="../Content/assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.print.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.colVis.min.js"></script>
+
+<script src="../Content/assets/js/bootstrap.bundle.min.js"></script>
+<script src="../Content/assets/js/metisMenu.min.js"></script>
+<script src="../Content/assets/js/waves.min.js"></script>
+<script src="../Content/assets/js/jquery.slimscroll.min.js"></script>
+
+
+
+
+<script src="../../../Content/assets/Sample/irregular-data-seriz.js"></script>
+<script src="../../../Content/assets/Sample/ohlc.js"></script>
+
+<link href="../../../Content/ALLItemCustom.css" rel="stylesheet" />
+<link href="../../../Content/PaginationCustom.css" rel="stylesheet" />
+<style>
+
+    .card {
+        margin-bottom: 24px;
+        border: none;
+        -webkit-box-shadow: 0 6px 20px #44b4a1 !important;
+        box-shadow: 0 6px 20px #44b4a1 !important;
+        border-radius: 5px;
+        background-color: #ffffff;
+    }
+
+    .card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border-radius: 0.25rem;
+    }
+
+    .popover {
+        max-width: 354px;
+        word-break: break-all;
+        word-wrap: break-word;
+        width: 115%;
+        max-height: 325px;
+        overflow: auto;
+    }
+
+    .Pagination-And-Report {
+        display: flex;
+        margin-top: 25px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .Only-Report {
+        display: flex;
+        margin-top: 25px;
+        justify-content: end;
+        align-items: center;
+    }
+</style>
+
+<script>
+    $('#RequisitionDate').bootstrapMaterialDatePicker({
+        format: 'YYYY-MM-DD',
+        cancelText: 'Descartar',
+        time: false,
+        clearButton: true
+
+    });
+
+    $('#FormDate').bootstrapMaterialDatePicker({
+        format: 'YYYY-MM-DD',
+        cancelText: 'Descartar',
+        time: false,
+        clearButton: true
+
+    });
+
+    $('#ToDate').bootstrapMaterialDatePicker({
+        format: 'YYYY-MM-DD',
+        cancelText: 'Descartar',
+        time: false,
+        clearButton: true
+
+    });
+</script>
+
+
+<style>
+    .JobDetailsListEnrty {
+        position: relative;
+        background: #ffffff;
+        border: 2px solid #eff2f9;
+        border-radius: 5px;
+        padding: 20px;
+        /* margin-bottom: 30px; */
+        padding: 28px 15px 15px 15px;
+    }
+
+    .JobDetailsList .ribbon.ribbon-mark::before {
+        border-color: #2d4971 transparent #2d4971 #2d4971 !important;
+        border-image: initial;
+        color: white;
+    }
+
+    .JobDetailsList .ribbon.ribbon-mark:before {
+        position: absolute;
+        top: 0;
+        left: 100%;
+        display: block;
+        width: 0;
+        height: 0;
+        content: '';
+        border: 15px solid #2f4686;
+        border-right: 10px solid transparent;
+    }
+
+    .jobDetailsList .ribbon {
+        padding: 0 15px;
+        height: 30px;
+        line-height: 30px;
+        clear: left;
+        position: absolute;
+        top: 0px;
+        left: -2px;
+        color: #ffffff;
+    }
+</style>
+

@@ -1,0 +1,156 @@
+﻿<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            /*margin: 4px;*/
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+
+    #SelectDiv .select2-container {
+        width: 276px !important;
+    }
+</style>
+
+
+<form name="paymentMethid">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="float-right">
+                    <ol class="breadcrumb" id="navigationUrlHide">
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Power Up</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Payment Method</a></li>
+                    </ol>
+                </div>
+                <h4 class="page-title">Payment Method</h4>
+            </div><!--end page-title-box-->
+        </div><!--end col-->
+    </div>
+    <!-- end page title end breadcrumb -->
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <br />
+
+                    
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <div class="input-group">
+                                    <input type="text" id="paymentMethodText" name="paymentmethod" class="form-control" ng-model="PaymentMethod.PaymentMethodName" placeholder="Payment Method">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-6 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <div class="row">
+                                <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <button class="btn btn-success" style="padding:5px;" ng-click="Save()"> Save</button>
+                                </div>
+                                <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <button class="btn btn-danger" style="padding:5px;" ng-click="ResetData()"> Reset</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-6 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <button class="btn btn-Info" style="padding:5px;" ng-click="FillData();"> Fill In Box</button>
+                        </div>
+
+                    </div>
+                    <br />
+                    <hr />
+                    <h3 class="mt-0 header-title mdi mdi-format-list-bulleted"> Payment Method List</h3>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3 DivMargin">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn btn-gradient-primary"><i class="fas fa-calendar"></i></button>
+                                </span>
+                                <input type="text" id="date-start" name="example-input1-group2" class="form-control" placeholder="Form Date" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3 DivMargin">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn btn-gradient-primary"><i class="fas fa-calendar"></i></button>
+                                </span>
+                                <input type="text" id="date-end" name="example-input1-group2" class="form-control" placeholder="To Date" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4 DivMargin">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn btn-gradient-primary"><i class="fas fa-search"></i></button>
+                                </span>
+                                <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Search">
+                            </div>
+                        </div>
+                        <div class="col-md-2 DivMargin ">
+                            <button class="btn btn-danger BtnWidth" style="width:100%;">Clear</button>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="table-responsive">
+                        <table class="table table-bordered mb-0 table-centered">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">S/N</th>
+                                    <th class="text-center">Payment Method</th>
+                                  
+                                   
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="aPaymentMethod in PaymentMethodList track by aPaymentMethod.PaymentMethodId">
+                                    <td class="text-center">{{$index + 1}}</td>
+                                    <td class="text-center">{{aPaymentMethod.PaymentMethodName}}</td>
+                                    <td class="text-center">
+                                        <button class="btn btn-success" ng-click="SelPaymentMethod()"> <i class="fa fa-edit"></i>Edit</button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table><!--end /table-->
+                    </div><!--end /tableresponsive-->
+                </div><!--end card-body-->
+            </div><!--end card-->
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+</form>
+
+
+<script>
+    $("#BatteryCode").select2({
+        placeholder: "Battery Code",
+
+        dropdownAutoWidth: false
+    });
+
+    $("#BatteryLocation").select2({
+        placeholder: "Battery Location",
+        dropdownAutoWidth: false
+    });
+</script>

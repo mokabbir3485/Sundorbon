@@ -1,0 +1,524 @@
+﻿
+<link href="../Content/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/icons.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/metisMenu.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/css/style.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+<link href="../Content/ToasterWithBtnAndRibonCustom.css" rel="stylesheet" type="text/css" />
+
+<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            margin: 4px;
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+</style>
+<div id="AmendedDataModal" class="modal fade">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Amendment preview</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body" style="overflow-x:scroll">
+                <form>
+                    <table class="table table-bordered  mb-0 table-centered">
+                        <thead style="background-color:#87b3a6; ">
+                            <tr class="tableHeadCustom">
+                                <th class="text-center">S/N</th>
+                                <th class="text-center">Item Name With Description</th>
+                                <th class="text-center">Requested Qty</th>
+                                <!--<th class="text-center">Amend Qty</th>-->
+                                <th class="text-center" ng-if="ddlApprovalGivenOn.Id==1">Price </th>
+                                <th class="text-center" ng-if="ddlApprovalGivenOn.Id==1">SD </th>
+                                <th class="text-center" ng-if="ddlApprovalGivenOn.Id==1">VAT </th>
+                                <th class="text-center">Remarks</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="aRequestionDetails in AmendedPurchaseRequestionDetailList track by $index">
+                                <td ng-click="$event.stopPropagation();" class="t-cell-center">
+                                    {{$index +1}}
+                                </td>
+                                <td class="text-center">{{aRequestionDetails.Combination}}</td>
+                                <td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">{{aRequestionDetails.Qty}}</td>
+                                <td class="text-center" ng-if="ddlApprovalGivenOn.Id==12">{{aRequestionDetails.Qty}}</td>
+
+                                <td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">
+                                    {{aRequestionDetails.UnitPrice}}
+                                </td>
+                                <td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">
+                                    {{aRequestionDetails.SD}}
+                                </td>
+                                <td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">
+                                    {{aRequestionDetails.AIT}}
+                                </td>
+                                <td class="text-center">
+                                    {{aRequestionDetails.Remarks}}
+                                </td>
+
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col" style="display: flex;justify-content: end; margin-top: 10px;">
+                            <button type="submit" class="btn btn-primary" ng-click="closeModal()">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end page title end breadcrumb -->
+<!-- end page title end breadcrumb -->
+<div class="container-fluid">
+
+    <div class="col-lg-12">
+        <div class="page-title-box">
+            <div class="float-right">
+                <ol class="breadcrumb" id="navigationUrlHide">
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Sundarban</a></li>
+                    <li class="breadcrumb-item"><a href="javascript:void(0);">Admin </a></li>
+                    <li class="breadcrumb-item active">Amendment</li>
+                </ol>
+            </div>
+
+        </div><!--end page-title-box-->
+    </div><!--end col-->
+    <br />
+
+    <div class="col-lg-12">
+
+        <div class="card">
+
+            <h4 class="card-header  text-white mt-0 PalelColor">
+                <i class="mdi mdi-format-list-bulleted-type"></i> Amendment
+
+            </h4>
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-search"></i></button>
+                                </span>
+
+                                <input type="text" id="ammendmentDate" ng-model="amendment.AmendDate" name="Amend Date" class="form-control" placeholder="Amend Date (dd/mm/yy)" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor" ng-click="ReloadApprovalGivenOnGet()"><i class="fas fa-sync" aria-hidden="true"></i></button>
+                                </span>
+                                <select class="form-control" ng-model="ddlApprovalGivenOn" ng-options="ApprovalGivenOn.ApprovalGivenOn for ApprovalGivenOn in ApprovalGivenOnList track by ApprovalGivenOn.Id">
+                                    <option value=""> --Approval given on--</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-search"></i></button>
+                                </span>
+                                <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="Search" ng-model="FromDate" name="Search" class="form-control" placeholder="From Date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn IconColor"><i class="fa fa-search"></i></button>
+                                </span>
+                                <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" id="Search" ng-model="ToDate" name="Search" class="form-control" placeholder="To Date">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="width:100%" ng-click="Search()" class="btn btn-outline-dark">Search </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="width:100%" class="btn btn-outline-danger" ng-click="ClearBtn()">Reset </button>
+                    </div>
+
+                </div>
+                <br />
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table id="item_table" class="table table-borderless table-hover mb-0 table-centered">
+                                <thead style="background-color:#87b3a6; ">
+                                    <tr class="tableHeadCustom">
+                                        <th class="text-center" style="width:10%">S/N</th>
+                                        <th class="text-center" style="width:30%">Ref. Transaction No.</th>
+                                        <th class="text-center" style="width:30%">Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!--<tr ng-repeat="aRequestion in PurchaseRequestionList track by $index" ng-click="GetPurchaserRequestionDetails(aRequestion)">-->
+                                    <tr id="datatable-buttons" dir-paginate="aRequestion in PurchaseRequestionList | itemsPerPage: samplePerPageForPurchaseRequestionList" ng-click="GetPurchaserRequestionDetails(aRequestion)" current-page="samplecurrentPageForPurchaseRequestionList" total-items="TotalLengthForPurchaseRequestionList" pagination-id="PurchaseRequestionListPage">
+                                        <td class="text-center" style="width:10%">  {{$index + ((samplecurrentPageForPurchaseRequestionList -1) * samplePerPageForPurchaseRequestionList) + 1}}</td>
+                                        <td class="text-center" style="width:30%">{{aRequestion.Number}}</td>
+                                        <td class="text-center" style="width:30%">{{aRequestion.DateData}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br />
+                            <div ng-show="TotalLengthForPurchaseRequestionList>samplePerPageForPurchaseRequestionList" class=" btn " style="background-color:#2d4971">
+                                <dir-pagination-controls max-size="8"
+                                                         direction-links="true"
+                                                         boundary-links="true"
+                                                         on-page-change="GetRequisitionData(newPageNumber)" style="text-align:center;"
+                                                         pagination-id="PurchaseRequestionListPage">
+                                </dir-pagination-controls>
+
+                            </div>
+                            <div style="float:right">
+                                <span ng-show="TotalLengthForPurchaseRequestionList>samplePerPageForPurchaseRequestionList" class="text-right" style="color:black;">Showing <span> {{((samplecurrentPageForPurchaseRequestionList-1)*samplePerPageForPurchaseRequestionList)+1}}</span>  to {{((samplecurrentPageForPurchaseRequestionList-1) * samplePerPageForPurchaseRequestionList) + PurchaseRequestionList.length}} of {{TotalLengthForPurchaseRequestionList}} Records</span>
+                            </div>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+
+                <br />
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table id="item_table" class="table table-bordered  mb-0 table-centered">
+                                <thead style="background-color:#87b3a6; ">
+                                    <tr class="tableHeadCustom">
+                                        <th class="text-center">S/N</th>
+                                        <th class="text-center" style="width: 40%;">Item Name With Description</th>
+                                        <th class="text-center">Requested Qty</th>
+                                        <!--<th class="text-center">Amend Qty</th>-->
+                                        <th class="text-center" ng-if="ddlApprovalGivenOn.Id==1">Price </th>
+                                        <th class="text-center" ng-if="ddlApprovalGivenOn.Id==1">SD </th>
+                                        <th class="text-center" ng-if="ddlApprovalGivenOn.Id==1">VAT </th>
+                                        <th class="text-center" ng-if="ddlApprovalGivenOn.Id==1">AIT </th>
+                                        <th class="text-center" ng-if="ddlApprovalGivenOn.Id!=1">Remarks</th>
+
+                                    </tr>
+                                </thead>
+                                <!--ng-repeat="aRequestionDetails in PurchaseRequestionDetailList track by $index"-->
+                                <tbody id="datatable-buttons" dir-paginate="aRequestionDetails in PurchaseRequestionDetailList | itemsPerPage: samplePerPage" current-page="samplecurrentPage" total-items="TotalLength" pagination-id="SamplePage">
+                                    <tr>
+                                        <td ng-click="$event.stopPropagation();" class="t-cell-center text-center">
+                                            <label>
+                                                <i ng-show="!aRequestionDetails.DisplaySta" class="fa fa-plus-square"></i>
+                                                <i ng-show="aRequestionDetails.DisplaySta" class="fa fa-minus-square"></i>
+                                                <input style="visibility:hidden;" type="checkbox" ng-model="aRequestionDetails.DisplaySta" />
+                                            </label>
+                                        </td>
+                                        <td class="text-center">{{aRequestionDetails.Combination}}</td>
+                                        <td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">{{aRequestionDetails.Qty}}</td>
+                                        <td class="text-center" ng-if="ddlApprovalGivenOn.Id==12">{{aRequestionDetails.Qty}}</td>
+
+                                        <td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">
+                                            {{aRequestionDetails.UnitPrice}}
+                                        </td>
+                                        <td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">
+                                            {{aRequestionDetails.SD}}
+                                        </td>
+                                        <td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">
+                                            {{aRequestionDetails.VAT}}
+                                        </td>
+                                        <td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">
+                                            {{aRequestionDetails.AIT}}
+                                        </td>
+                                        <td class="text-center" ng-if="ddlApprovalGivenOn.Id!=1">
+                                            {{aRequestionDetails.Remarks}}
+                                        </td>
+                                    </tr>
+
+                                    <tr ng-click="$event.stopPropagation();" ng-show="aRequestionDetails.DisplaySta">
+                                        <!--<td></td>-->
+                                        <td colspan="8" style="width:100%">
+                                            <div style="width:100%">
+                                                <table style="width:100%" class="responstable table-hover table-bordered">
+                                                    <thead style="background-color:#87b3a6; ">
+                                                        <tr>
+                                                            <th class="text-center" style="width: 47%;">Item Name With Description</th>
+                                                            <th class="text-center" style="width: 16%;">Amend Qty</th>
+                                                            <th class="text-center" style="width: 8%;" ng-if="ddlApprovalGivenOn.Id==1">Amend Price </th>
+                                                            <th class="text-center" style="width: 7%;" ng-if="ddlApprovalGivenOn.Id==1">Amend SD </th>
+                                                            <th class="text-center" style="width: 8%;" ng-if="ddlApprovalGivenOn.Id==1">Amend VAT </th>
+                                                            <th class="text-center" style="width: 8%;" ng-if="ddlApprovalGivenOn.Id==1">Amend AIT </th>
+                                                            <th class="text-center" ng-if="ddlApprovalGivenOn.Id!=1">Remarks</th>
+                                                            <!--<th>Action</th>-->
+                                                        </tr>
+                                                    </thead>
+                                                    <tr>
+                                                        <td class="text-center">{{aRequestionDetails.Combination}}</td>
+                                                        <!--<td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">{{aRequestionDetails.Qty}}</td>-->
+                                                        <td class="text-center">
+                                                            <input type="number" id="amenddedprice" style="background-color:white;text-align:right" ng-model="aRequestionDetails.AmentQty" name="Discount" class="form-control" placeholder="0.00">
+                                                        </td>
+                                                        <td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">
+                                                            <input type="number" id="amenddedprice" style="background-color:white;text-align:right" ng-model="aRequestionDetails.AmendUnitPrice" name="Discount" class="form-control" placeholder="0.00">
+                                                        </td>
+                                                        <td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">
+                                                            <input type="number" id="amenddedprice" style="background-color:white;text-align:right" ng-model="aRequestionDetails.AmendSD" name="Discount" class="form-control" placeholder="0.00">
+
+                                                        </td>
+                                                        <td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">
+                                                            <input type="number" id="amenddedprice" style="background-color:white;text-align:right" ng-model="aRequestionDetails.AmendVAT" name="Discount" class="form-control" placeholder="0.00">
+                                                        </td>
+                                                        <td class="text-center" ng-if="ddlApprovalGivenOn.Id==1">
+                                                            <input type="number" id="amenddedprice" style="background-color:white;text-align:right" ng-model="aRequestionDetails.AmendAIT" name="Discount" class="form-control" placeholder="0.00">
+                                                        </td>
+                                                        <td class="text-center" ng-if="ddlApprovalGivenOn.Id!=1">{{aRequestionDetails.Remarks}}</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                            <br/>
+                            <div ng-show="TotalLength>samplePerPage" class=" btn " style="background-color:#2d4971">
+                                <dir-pagination-controls max-size="8"
+                                                         direction-links="true"
+                                                         boundary-links="true"
+                                                         on-page-change="GetSampleDate(newPageNumber)" style="text-align:center;"
+                                                         pagination-id="SamplePage">
+                                </dir-pagination-controls>
+
+                            </div>
+                            <div style="float:right">
+                                <span ng-show="TotalLength>samplePerPage" class="text-right" style="color:black;">Showing <span> {{((samplecurrentPage-1)*samplePerPage)+1}}</span>  to {{((samplecurrentPage-1) * samplePerPage) + PurchaseRequestionDetailList.length}} of {{TotalLength}} Records</span>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <button style="width:100%" ng-click="AmmendmentSave()" class="btn btn-outline-dark">{{btnName}} </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button style="width:100%" class="btn btn-outline-danger" ng-click="ClearBtn()">Reset </button>
+                    </div>
+                    <div class="col-md-2" ng-if="PurchaseRequestionDetailList.length>0">
+                        <button style="width:100%" ng-click="AmmendmentPreview()" class="btn btn-outline-dark">Preview </button>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="row">
+                    <div class="ribbon-1" style="width:100%">
+                        <div class="ribbon-box">
+                            <div class="ribbon ribbon-mark" style="background-color:#2d4971 !important;color:white;font-weight:bold">
+                                <i class="fa fa-list-alt" style="font-size:18px;color:white;"></i> Amendment List
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+
+                                </div>
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-prepend">
+                                                <button type="button" class="btn IconColor"><i class="fa fa-text-width"></i></button>
+                                            </span>
+                                            <input type="text" id="textUsername" ng-model="SearchItem" name="userName" class="form-control" placeholder="Reference Transaction Number">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <button style="width:100%;" class="btn btn-outline-dark" ng-click="SearchBtn()">Search </button>
+                                </div>
+                                <div class="col-md-2">
+                                    <button style="width:100%" class="btn btn-outline-danger" ng-click="ClearSearchBtn()">Clear </button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-borderless mb-0 table-centered">
+                                    <thead>
+                                        <tr style="background-color:#87b3a6; ">
+                                            <th class="text-center">S/N</th>
+                                            <th class="text-center">Ref. tran. Number</th>
+                                            <th class="text-center">Amend Date</th>
+                                            <th class="text-center">Approval Given On</th>
+                                            <th class="text-center">Employee Name</th>
+                                            <th class="text-center">Action</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr dir-paginate="aAmendment in AmendmentList | filter:q | itemsPerPage: PerPage" current-page="currentPage" total-items="total_count" pagination-id="Item">
+                                            <td class="text-center">{{$index + (( currentPage - 1) * PerPage) + 1}}</td>
+                                            <td class="text-center">{{aAmendment.ReferenceTransactionNumber}}</td>
+                                            <td class="text-center">{{aAmendment.AmendDate}}</td>
+                                            <td class="text-center">{{aAmendment.ApprovalGivenOn}}</td>
+                                            <td class="text-center">{{aAmendment.EmployeeName}}</td>
+
+                                            <td class="text-center">
+                                                <button class="btn IconColor" ng-click="OpenReport(aAmendment)">
+                                                    <i class="typcn typcn-printer" style="font-size:22px; color:black"></i>
+                                                </button>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table><!--end /table-->
+                                <div ng-show="total_count>PerPage">
+                                    <hr />
+                                    <div style="background-color:#2d4971" class="btn">
+                                        <dir-pagination-controls max-size="8"
+                                                                 direction-links="true"
+                                                                 boundary-links="true"
+                                                                 on-page-change="getData(newPageNumber)" style="text-align:center;"
+                                                                 pagination-id="Item">
+                                        </dir-pagination-controls>
+                                    </div>
+                                </div>
+
+                                <br />
+                                <br />
+                                <div class="row pagination-footer">
+                                    <div class="col-md-6">
+                                        <span>Show </span><input class="input-pagesize" type="number" min="1" max="100" step="1" ng-maxlength="100" ng-minlength="1" width="1" ng-model="PerPage"> <span>Records </span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <span class="pull-right">Showing {{((currentPage-1)*PerPage)+1}} to {{((currentPage-1) * PerPage) + ApprovalGivenOnList.length}} of {{total_count}} Records</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <br />
+                    
+                </div>
+
+
+            </div><!--end card-body-->
+
+
+        </div><!--end card-->
+
+
+
+    </div><!--end card-->
+</div> <!-- end col -->
+<!--<script src="../Content/assets/js/jquery.min.js"></script>-->
+<!-- Required datatable js -->
+<script src="../Content/assets/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="../Content/assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
+<!-- Buttons examples -->
+<script src="../Content/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+<script src="../Content/assets/plugins/datatables/jszip.min.js"></script>
+<script src="../Content/assets/plugins/datatables/pdfmake.min.js"></script>
+<script src="../Content/assets/plugins/datatables/vfs_fonts.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.html5.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.print.min.js"></script>
+<script src="../Content/assets/plugins/datatables/buttons.colVis.min.js"></script>
+
+<script src="../Content/assets/js/bootstrap.bundle.min.js"></script>
+<script src="../Content/assets/js/metisMenu.min.js"></script>
+<script src="../Content/assets/js/waves.min.js"></script>
+<script src="../Content/assets/js/jquery.slimscroll.min.js"></script>
+
+
+
+
+<script src="../../../Content/assets/Sample/irregular-data-seriz.js"></script>
+<script src="../../../Content/assets/Sample/ohlc.js"></script>
+
+<link href="../../../Content/ALLItemCustom.css" rel="stylesheet" />
+<link href="../../../Content/PaginationCustom.css" rel="stylesheet" />
+<style>
+
+    .card {
+        margin-bottom: 24px;
+        border: none;
+        -webkit-box-shadow: 0 6px 20px #44b4a1 !important;
+        box-shadow: 0 6px 20px #44b4a1 !important;
+        border-radius: 5px;
+        background-color: #ffffff;
+    }
+
+    .card {
+        position: relative;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        background-color: #fff;
+        background-clip: border-box;
+        border-radius: 0.25rem;
+    }
+
+    .popover {
+        max-width: 354px;
+        word-break: break-all;
+        word-wrap: break-word;
+        width: 115%;
+        max-height: 325px;
+        overflow: auto;
+    }
+
+    .Pagination-And-Report {
+        display: flex;
+        margin-top: 25px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .Only-Report {
+        display: flex;
+        margin-top: 25px;
+        justify-content: end;
+        align-items: center;
+    }
+</style>
+
+<script>
+    $('#ammendmentDate').bootstrapMaterialDatePicker({
+        format: 'DD/MM/YYYY',
+        cancelText: 'Descartar',
+        time: false,
+        clearButton: true
+
+    });
+</script>
+
+
+
+

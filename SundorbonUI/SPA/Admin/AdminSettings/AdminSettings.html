@@ -1,0 +1,166 @@
+﻿
+
+<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+       
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+            margin:4px;
+        }
+        .inputFieldHeight{
+            margin-top:4px;
+        }
+      
+    }
+</style>
+<link href="../../../Content/Toggle.css" rel="stylesheet" />
+<form name="AddBatteryForm">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="float-right">
+                    <ol class="breadcrumb" id="navigationUrlHide">
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Power Up</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Admin Settings</a></li>
+
+                    </ol>
+                </div>
+                <h4 class="page-title">Admin Settings</h4>
+            </div><!--end page-title-box-->
+        </div><!--end col-->
+    </div>
+    <!-- end page title end breadcrumb -->
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group inputFieldHeight">
+                                <select id="ddlCurrency2" class=" form-control " ng-model="ddlCurrency">
+                                    <option value="">Select Currency</option>
+                                    <option value="USD">USD</option>
+                                    <option value="BTC">BTC</option>
+                                    <option value="RS">RS</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group inputFieldHeight">
+                                <select class="form-control" ng-model="ddlCharge">
+                                    <option value="">--Charge Type-- </option>
+                                    <option value="1">Per kilowatt rate </option>
+                                    <option value="2">Fixed Charge </option>
+                                </select>
+                                <!--<input type="text" id="ChargeAmount" name="ChargeAmount" ng-model="Settings.ChargeAmount" class="form-control" placeholder="Charge Amount ( $ / KilloWatt )">-->
+                            </div>
+
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group inputFieldHeight">
+                                <input type="text" id="Fixed charges" name="TaxRate" class="form-control" ng-model="Settings.ChargeAmount" placeholder="Charge Amount">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group inputFieldHeight">
+                                <input type="text" id="TaxRate" name="TaxRate" class="form-control" ng-model="Settings.TaxRate" placeholder="Tax Rate (%)">
+                            </div>
+                        </div>
+
+                    </div>
+                    <br />
+                 
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input-group inputFieldHeight">
+                                <input type="text" id="Cuttoff" name="Cuttoff" class="form-control" ng-model="Settings.Cuttoff" placeholder="Booking Cuttoff Timeout Hours">
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <div class="input-group inputFieldHeight">
+                                <input type="text" id="CancelHours" name="CancelHours" class="form-control" ng-model="Settings.CancelHours" placeholder="Booking Cancellation Allowed Hours">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-group inputFieldHeight">
+                                <input type="email" id="AdminEmail" name="AdminEmail" class="form-control" ng-model="Settings.AdminEmail" placeholder="Default Admin Email To Receive Notification">
+                            </div>
+                          
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="can-toggle demo-rebrand-1">
+                                <input id="b" type="checkbox" ng-model="Status" ng-click="SelectDoor(aLockUnlock)" ng-change="test()">
+                                <label for="b">
+                                    <div class="can-toggle__switch" data-checked="Enable" data-unchecked="Disable"></div>
+                                    <div class="can-toggle__label-text">Disallow booking when previous month bill is due</div>
+                                </label>
+                            </div>
+                            
+
+                        </div>
+
+                    </div>
+                    <br />
+                    <br />
+                    <!--<div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <button class="btn btn-success BtnWidth" ng-click="Save()"> Save</button>
+                                <button ng-click="ResetData()" class="btn btn-danger BtnWidth"> Reset</button>
+                                <button ng-click="SetFillData()" class="btn btn-success BtnWidth"> Fill Data</button>
+                            </div>
+                        </div>
+                    </div>-->
+
+                    <div class="row">
+                        <div class="col-6 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <div class="row">
+                                <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <button class="btn btn-success" style="padding:5px;" ng-click="Save()"> Save</button>
+                                </div>
+                                <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <button class="btn btn-danger" style="padding:5px;"  ng-click="ResetData()"> Reset</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-6 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <button class="btn btn-Info" style="padding:5px;" ng-click="SetFillData()"> Fill In Box</button>
+                        </div>
+
+                    </div>
+
+                    <!--end /table-->
+                    <!--</div>--><!--end /tableresponsive-->
+                </div><!--end card-body-->
+            </div><!--end card-->
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+</form>
+
+
+
+<script>
+    $("#ddlCurrency").select2({
+        placeholder: "Select Currency",
+        dropdownAutoWidth: false
+    });
+
+    
+</script>

@@ -1,0 +1,205 @@
+﻿<style>
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+          /*  margin: 4px;*/
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+
+    #SelectDiv .select2-container {
+        width: 276px !important;
+    }
+</style>
+
+<form name="LockerManagementForm">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="float-right">
+                    <ol class="breadcrumb" id="navigationUrlHide">
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Power Up</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">User Manage</a></li>
+
+                    </ol>
+                </div>
+                <h4 class="page-title">User Manage</h4>
+            </div><!--end page-title-box-->
+        </div><!--end col-->
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="page-title">User Manage</h4>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="text" id="FirstName" name="FirstName" class="form-control" ng-model="User.FirstName" placeholder="First Name">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="text" id="LastName" name="LastName" class="form-control" ng-model="User.LastName" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="email" id="Email" name="Email" class="form-control" ng-model="User.EmailAddress" placeholder="Email Address">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <select id="ddlRole" class="form-control" ng-model="ddlRole" ng-options="Role.RoleName for Role in RoleList track by Role.RoleId" ng-change="User.RoleId = ddlRole.RoleId">
+                                    <option value="">Select Role</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="text" id="Username" name="Username" class="form-control" ng-model="User.Username" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="password" id="Password" name="Password" class="form-control" ng-model="User.Password" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control" ng-model="User.ConfirmPassword" placeholder="Confirm Password">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br />
+                    <div class="row">
+                        <div class="col-6 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <div class="row">
+                                <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <button class="btn btn-success" style="padding:5px;" ng-click="Save()"> Save</button>
+                                </div>
+                                <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <button class="btn btn-danger" style="padding:5px;" ng-click="Reset()"> Reset</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-6 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <button class="btn btn-Info" style="padding:5px;" ng-click="FillData();"> Fill In Box</button>
+                        </div>
+
+                    </div>
+
+
+                    <hr />
+                    <div class="row">
+
+                        <div class="col-lg-12">
+                            <h3 class="mt-0 header-title mdi mdi-format-list-bulleted"> User List</h3>
+
+                        </div>
+
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3 DivMargin">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn btn-gradient-primary"><i class="fas fa-calendar"></i></button>
+                                </span>
+                                <input type="text" id="date-start" name="example-input1-group2" class="form-control" placeholder="Form Date" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3 DivMargin">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn btn-gradient-primary"><i class="fas fa-calendar"></i></button>
+                                </span>
+                                <input type="text" id="date-end" name="example-input1-group2" class="form-control" placeholder="To Date" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4 DivMargin">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn btn-gradient-primary"><i class="fas fa-search"></i></button>
+                                </span>
+                                <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Search">
+                            </div>
+                        </div>
+                        <div class="col-md-2 DivMargin ">
+                            <button class="btn btn-danger BtnWidth" style="width:100%;">Clear</button>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-12">
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered ">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-center">S/N</th>
+                                            <th class="text-center">Role Name</th>
+                                            <th class="text-center">First Name</th>
+                                            <th class="text-center">Last Name</th>
+                                            <th class="text-center">Email</th>
+                                            <th class="text-center">Username</th>
+                                            <th class="text-center">Password</th>
+                                            <th class="text-center" >Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="aUser in UserList track by aUser.UserId">
+                                            <td class="text-center">{{$index + 1}}</td>
+                                            <td class="text-center">{{aUser.RoleName}}</td>
+                                            <td class="text-center">{{aUser.FirstName}}</td>
+                                            <td class="text-center">{{aUser.LastName}}</td>
+                                            <td class="text-center">{{aUser.EmailAddress}}</td>
+                                            <td class="text-center">{{aUser.Username}}</td>
+                                            <td class="text-center">{{aUser.Password}}</td>
+                                            <td class="text-center" >
+                                                <button class="btn btn-success" style="margin:3px;float:left;" ng-click="SelUser()"> <i class="fa fa-edit"></i>Edit</button>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table><!--end /table-->
+                            </div><!--end /tableresponsive-->
+                            <br />
+                        </div>
+                    </div>
+
+                </div>
+                    
+
+                      
+             
+                  
+                </div><!--end card-body-->
+            </div><!--end card-->
+        </div> <!-- end col -->
+    
+</form>
+
+<script>
+    $("#userRole").select2({
+        placeholder: "User Role",
+        dropdownAutoWidth: false
+    })
+</script>

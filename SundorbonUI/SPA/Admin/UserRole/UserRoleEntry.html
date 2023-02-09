@@ -1,0 +1,173 @@
+<style>
+
+
+    @media only screen and (min-device-width : 200px) and (max-device-width : 767px) {
+
+        #navigationUrlHide {
+            display: none;
+        }
+
+        .BtnWidth {
+            width: 100%;
+          /*  margin: 4px;*/
+        }
+
+        .DivMargin {
+            margin-top: 5px;
+        }
+    }
+
+</style>
+
+
+<form name="paymentMethid">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="page-title-box">
+                <div class="float-right">
+                    <ol class="breadcrumb" id="navigationUrlHide">
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Power Up</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="javascript:void(0);">User Role</a></li>
+                    </ol>
+                </div>
+                <h4 class="page-title">User Role</h4>
+            </div><!--end page-title-box-->
+        </div><!--end col-->
+    </div>
+    <!-- end page title end breadcrumb -->
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-4">
+                                <div class="input-group">
+                                    <input type="text" style="width:100%" id="UserRole" name="UserRole" class="form-control" ng-model="Role.UserRole" placeholder="User Role">
+                                </div>
+                        </div>
+
+                    </div>
+                    <br />
+                    <br />
+                    <div class="row">
+                        <div class="col-6 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <div class="row">
+                                <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <button class="btn btn-success" style="padding:5px;" ng-click="Save()"> Save</button>
+                                </div>
+                                <div class="col-6 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <button class="btn btn-danger" style="padding:5px;" ng-click="RoleReset()"> Reset</button>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-6 col-xs-6 col-sm-6 col-md-2 col-lg-2">
+                            <button class="btn btn-Info" style="padding:5px;" ng-click="FillData();"> Fill In Box</button>
+                        </div>
+
+                    </div>
+                    <br />
+                    <hr />
+                    <h3 class="mt-0 header-title mdi mdi-format-list-bulleted"> User Role List</h3>
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-3 DivMargin">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn btn-gradient-primary"><i class="fas fa-calendar"></i></button>
+                                </span>
+                                <input type="text" id="date-start" name="example-input1-group2" class="form-control" placeholder="Form Date" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-3 DivMargin">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn btn-gradient-primary"><i class="fas fa-calendar"></i></button>
+                                </span>
+                                <input type="text" id="date-end" name="example-input1-group2" class="form-control" placeholder="To Date" readonly>
+                            </div>
+                        </div>
+                        <div class="col-md-4 DivMargin">
+                            <div class="input-group">
+                                <span class="input-group-prepend">
+                                    <button type="button" class="btn btn-gradient-primary"><i class="fas fa-search"></i></button>
+                                </span>
+                                <input type="text" id="example-input1-group2" name="example-input1-group2" class="form-control" placeholder="Search">
+                            </div>
+                        </div>
+                        <div class="col-md-2 DivMargin ">
+                            <button class="btn btn-danger BtnWidth" style="width:100%">Clear</button>
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="table-responsive">
+                        <table class="table table-bordered mb-0 table-centered">
+                            <thead>
+                                <tr>
+                                    <th class="text-center">SL No</th>
+                                    <th class="text-center">User Role</th>
+                                    <th class="text-center" colspan="3" style="width: 34%">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="aRole in RoleList track by aRole.RoleId">
+                                    <td class="text-center">{{$index + 1}}</td>
+                                    <td class="text-center">{{aRole.UserRole}}</td>
+
+                                    <td class="text-center" style="border-right:hidden; width:10%">
+                                        <button class="btn btn-success" ng-click="Sel()"> <i class="fa fa-edit"></i>Edit</button>
+                                    </td>
+                                    <td class="text-center" style="border-right: hidden; width: 12%">
+                                        <button class="btn btn-danger" ng-click="Del()"><i class="fa fa-trash"></i> Delete</button>
+                                    </td>
+                                    <td class="text-center" style=" width: 12%">
+                                        <button class="btn btn-primary" ng-click="Rpt()"><i class="fa fa-print"></i> Report</button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table><!--end /table-->
+                    </div><!--end /tableresponsive-->
+                </div><!--end card-body-->
+            </div><!--end card-->
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
+
+    <!--<div class="row">
+        <div class="col-xs-12"style="width:100%;background-color:red">
+            <h1 style="width:100%;background-color:red">Hello </h1>
+        </div>
+        <div style="width:100%;background-color:blue" class="col-sm-12">
+            <h1>Hello </h1>
+        </div>
+        <div class="col-md-12" style="width:100%;background-color:gray">
+            <h1>Hello </h1>
+        </div>
+        <div class="col-lg-12"style="width:100%;background-color:aqua">
+            <h1>Hello </h1>
+        </div>
+    </div>-->
+
+</form>
+
+
+
+<script>
+    $("#BatteryCode").select2({
+        placeholder: "Battery Code",
+
+        dropdownAutoWidth: false
+    });
+
+    $("#BatteryLocation").select2({
+        placeholder: "Battery Location",
+        dropdownAutoWidth: false
+    });
+</script>
